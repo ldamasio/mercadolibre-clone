@@ -37,3 +37,55 @@ type ProductDetail struct {
 	Shipping       ShippingInfo    `json:"shipping"`
 	ViewsCount     int             `json:"views_count"`
 }
+
+// ProductFeatures represents product characteristics
+type ProductFeatures struct {
+	Main       []Feature      `json:"main"`
+	Screen     ScreenSpecs    `json:"screen,omitempty"`
+	Dimensions DimensionSpecs `json:"dimensions,omitempty"`
+}
+
+// Feature represents a single product feature
+type Feature struct {
+	Name  string `json:"name"`
+	Value string `json:"value"`
+}
+
+// ScreenSpecs for electronic devices
+type ScreenSpecs struct {
+	Size       string `json:"size"`
+	Resolution string `json:"resolution"`
+	Technology string `json:"technology"`
+}
+
+// DimensionSpecs for physical dimensions
+type DimensionSpecs struct {
+	Height string `json:"height"`
+	Width  string `json:"width"`
+	Depth  string `json:"depth"`
+	Weight string `json:"weight"`
+}
+
+// Installments information
+type Installments struct {
+	Quantity int     `json:"quantity"`
+	Amount   float64 `json:"amount"`
+	Rate     float64 `json:"rate"`
+	Currency string  `json:"currency"`
+}
+
+// ShippingInfo contains shipping details
+type ShippingInfo struct {
+	FreeShipping      bool   `json:"free_shipping"`
+	LogisticType      string `json:"logistic_type"`
+	EstimatedDelivery string `json:"estimated_delivery"`
+}
+
+// ProductWithDetails combines product with its details and seller
+type ProductWithDetails struct {
+	Product       Product       `json:"product"`
+	ProductDetail ProductDetail `json:"product_detail"`
+	Seller        Seller        `json:"seller"`
+	Reviews       []Review      `json:"reviews,omitempty"`
+	Questions     []Question    `json:"questions,omitempty"`
+}
