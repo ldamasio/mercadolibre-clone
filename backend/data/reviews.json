@@ -1,0 +1,52 @@
+[
+  {
+    "id": "REV001",
+    "product_id": "MLB123456789",
+    "user_id": "USER001",
+    "username": "João Silva",
+    "rating": 5,
+    "comment": "Excelente celular! Chegou antes do prazo e muito bem embalado. A câmera é incrível e o desempenho está perfeito para jogos.",
+    "helpful_count": 45,
+    "created_at": "2024-12-15T09:30:00Z"
+  },
+  {
+    "id": "REV002",
+    "product_id": "MLB123456789",
+    "user_id": "USER002",
+    "username": "Maria Santos",
+    "rating": 4,
+    "comment": "Muito bom, apenas a bateria poderia durar um pouco mais. No geral, ótimo custo-benefício.",
+    "helpful_count": 23,
+    "created_at": "2024-12-10T14:20:00Z"
+  },
+  {
+    "id": "REV003",
+    "product_id": "MLB123456789",
+    "user_id": "USER003",
+    "username": "Pedro Oliveira",
+    "rating": 5,
+    "comment": "Produto chegou conforme anunciado. Vendedor muito atencioso e respondeu todas as minhas perguntas.",
+    "helpful_count": 15,
+    "created_at": "2024-12-08T11:00:00Z"
+  },
+  {
+    "id": "REV004",
+    "product_id": "MLB987654321",
+    "user_id": "USER004",
+    "username": "Ana Costa",
+    "rating": 5,
+    "comment": "Motorola não decepciona! Tela linda, câmera excelente e o carregamento super rápido é um diferencial.",
+    "helpful_count": 67,
+    "created_at": "2024-12-18T16:45:00Z"
+  },
+  {
+    "id": "REV005",
+    "product_id": "MLB456789123",
+    "user_id": "USER005",
+    "username": "Carlos Mendes",
+    "rating": 5,
+    "comment": "Simplesmente o melhor iPhone que já tive. A câmera com zoom 5x é impressionante!",
+    "helpful_count": 102,
+    "created_at": "2024-12-20T13:30:00Z"
+  }
+]
