@@ -1,7 +1,10 @@
+import React from 'react';
+import Link from 'next/link';
+
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <h1 className="text-2xl font-bold text-center mt-10">
+      <h1 className="text-2xl font-bold text-center mt-5">
         MercadoLibre Clone
       </h1>
       <div className="flex justify-center items-center h-screen">

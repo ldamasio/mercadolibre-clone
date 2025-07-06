@@ -11,41 +11,43 @@ import { ProductInfo } from '@/components/product/ProductInfo';
 import { ProductPrice } from '@/components/product/ProductPrice';
 import { SellerInfo } from '@/components/product/SellerInfo';
 import { ProductFeatures } from '@/components/product/ProductFeatures';
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
-import { Loading } from '@/components/ui/Loading';
-import { ErrorMessage } from '@/components/ui/ErrorMessage';
-import { useProduct } from '@/hooks/useProduct';
+import Button from '@/components/ui/Button';
+// import { Card } from '@/components/ui/Card';
+// import { Loading } from '@/components/ui/Loading';
+// import { ErrorMessage } from '@/components/ui/ErrorMessage';
+// import { useProduct } from '@/hooks/useProduct';
 
 export default function ProductPage() {
   const params = useParams();
   const productId = params.id as string;
-  const { product: data, loading, error } = useProduct(productId);
+  // const { product: data, loading, error } = useProduct(productId);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-100">
-        <Header />
-        <div className="px-4 py-8 max-w-7xl mx-auto">
-          <Loading />
-        </div>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="min-h-screen bg-gray-100">
+  //       <Header />
+  //       <div className="px-4 py-8 max-w-7xl mx-auto">
+  //         <Loading />
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
-  if (error || !data) {
-    return (
-      <div className="min-h-screen bg-gray-100">
-        <Header />
-        <div className="px-4 py-8 max-w-7xl mx-auto">
-          <ErrorMessage 
-            message={error?.message || 'Produto não encontrado'} 
-            onRetry={() => window.location.reload()}
-          />
-        </div>
-      </div>
-    );
-  }
+  <Header />
+
+  // if (error || !data) {
+  //   return (
+  //     <div className="min-h-screen bg-gray-100">
+  //       <Header />
+  //       <div className="px-4 py-8 max-w-7xl mx-auto">
+  //         <ErrorMessage 
+  //           message={error?.message || 'Produto não encontrado'} 
+  //           onRetry={() => window.location.reload()}
+  //         />
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   const { product, product_detail, seller } = data;
 
@@ -69,9 +71,9 @@ export default function ProductPage() {
         {/* Mobile Layout */}
         <div className="block lg:hidden space-y-4">
           {/* Product Title - Mobile */}
-          <Card>
+          {/* <Card>
             <ProductInfo product={product} />
-          </Card>
+          </Card> */}
           
           {/* Gallery - Mobile */}
           <Card padding={false}>
