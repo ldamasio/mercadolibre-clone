@@ -1,0 +1,95 @@
+[
+  {
+    "id": "SELLER001",
+    "nickname": "TECNOFAST",
+    "reputation": {
+      "level": 5,
+      "status": "platinum",
+      "transactions": {
+        "completed": 12543,
+        "canceled": 156,
+        "total": 12699
+      },
+      "ratings": {
+        "positive": 98.5,
+        "neutral": 1.0,
+        "negative": 0.5
+      }
+    },
+    "tags": [
+      "brand",
+      "large_seller",
+      "credits_profile",
+      "messages_as_seller"
+    ],
+    "location": {
+      "city": "São Paulo",
+      "state": "SP",
+      "country": "Brasil"
+    },
+    "experience_years": 5,
+    "leader_status": "MercadoLíder Platinum"
+  },
+  {
+    "id": "SELLER002",
+    "nickname": "MOBILEZONE",
+    "reputation": {
+      "level": 4,
+      "status": "gold",
+      "transactions": {
+        "completed": 5832,
+        "canceled": 89,
+        "total": 5921
+      },
+      "ratings": {
+        "positive": 97.2,
+        "neutral": 1.8,
+        "negative": 1.0
+      }
+    },
+    "tags": [
+      "brand",
+      "good_quality_thumbnails",
+      "immediate_payment"
+    ],
+    "location": {
+      "city": "Rio de Janeiro",
+      "state": "RJ",
+      "country": "Brasil"
+    },
+    "experience_years": 3,
+    "leader_status": "MercadoLíder Gold"
+  },
+  {
+    "id": "SELLER003",
+    "nickname": "APPLE STORE OFICIAL",
+    "reputation": {
+      "level": 5,
+      "status": "platinum",
+      "transactions": {
+        "completed": 45678,
+        "canceled": 234,
+        "total": 45912
+      },
+      "ratings": {
+        "positive": 99.2,
+        "neutral": 0.5,
+        "negative": 0.3
+      }
+    },
+    "tags": [
+      "official_store",
+      "brand",
+      "premium_seller",
+      "international_seller"
+    ],
+    "location": {
+      "city": "São Paulo",
+      "state": "SP",
+      "country": "Brasil"
+    },
+    "experience_years": 8,
+    "leader_status": "Loja Oficial"
+  }
+]
+
