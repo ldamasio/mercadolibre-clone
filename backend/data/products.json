@@ -1,0 +1,238 @@
+// backend/data/products.json
+[
+    {
+      "id": "MLB123456789",
+      "title": "Samsung Galaxy A55 5G Dual SIM 256 GB azul escuro 8 GB RAM",
+      "price": 439.00,
+      "original_price": 499.00,
+      "currency": "USD",
+      "discount_percentage": 12,
+      "condition": "new",
+      "available_quantity": 150,
+      "sold_quantity": 1769,
+      "images": [
+        "/images/samsung-a55-1.jpg",
+        "/images/samsung-a55-2.jpg",
+        "/images/samsung-a55-3.jpg",
+        "/images/samsung-a55-4.jpg"
+      ],
+      "thumbnail": "/images/samsung-a55-thumb.jpg",
+      "free_shipping": true,
+      "tags": ["best_seller", "brand_official", "immediate_delivery"],
+      "seller_id": "SELLER001",
+      "category_id": "MLB1055",
+      "created_at": "2024-08-10T09:00:00Z",
+      "updated_at": "2024-12-19T16:30:00Z"
+    },
+    {
+      "id": "MLB456789123",
+      "title": "iPhone 15 Pro Max 256GB Titanium Natural",
+      "price": 1379.00,
+      "original_price": 1499.00,
+      "currency": "USD",
+      "discount_percentage": 8,
+      "condition": "new",
+      "available_quantity": 45,
+      "sold_quantity": 892,
+      "images": [
+        "/images/iphone15-1.jpg",
+        "/images/iphone15-2.jpg",
+        "/images/iphone15-3.jpg",
+        "/images/iphone15-4.jpg",
+        "/images/iphone15-5.jpg"
+      ],
+      "thumbnail": "/images/iphone15-thumb.jpg",
+      "free_shipping": true,
+      "tags": ["premium", "best_seller", "apple_official"],
+      "seller_id": "SELLER003",
+      "category_id": "MLB1055",
+      "created_at": "2024-09-20T11:00:00Z",
+      "updated_at": "2024-12-21T10:15:00Z"
+    },
+    {
+      "id": "MLB987654321",
+      "title": "Motorola Edge 50 Fusion 5G 256 GB azul Athos 8 GB RAM",
+      "price": 419.00,
+      "original_price": 419.00,
+      "currency": "USD",
+      "discount_percentage": 0,
+      "condition": "new",
+      "available_quantity": 89,
+      "sold_quantity": 423,
+      "images": [
+        "/images/motorola-edge-1.jpg",
+        "/images/motorola-edge-2.jpg",
+        "/images/motorola-edge-3.jpg"
+      ],
+      "thumbnail": "/images/motorola-edge-thumb.jpg",
+      "free_shipping": true,
+      "tags": ["new_release", "5g"],
+      "seller_id": "SELLER002",
+      "category_id": "MLB1055",
+      "created_at": "2024-06-15T10:30:00Z",
+      "updated_at": "2024-12-20T14:45:00Z"
+    },
+    {
+      "id": "MLB789012345",
+      "title": "Samsung Galaxy S23 FE 5G Dual SIM 256 GB verde menta 8 GB RAM",
+      "price": 326.00,
+      "original_price": 326.00,
+      "currency": "USD",
+      "discount_percentage": 0,
+      "condition": "new",
+      "available_quantity": 60,
+      "sold_quantity": 1424,
+      "images": [
+        "/images/samsung-s23fe-1.jpg",
+        "/images/samsung-s23fe-2.jpg",
+        "/images/samsung-s23fe-3.jpg"
+      ],
+      "thumbnail": "/images/samsung-s23fe-thumb.jpg",
+      "free_shipping": true,
+      "tags": ["best_seller"],
+      "seller_id": "SELLER001",
+      "category_id": "MLB1055",
+      "created_at": "2024-07-01T14:00:00Z",
+      "updated_at": "2024-12-22T09:00:00Z"
+    },
+    {
+      "id": "MLB012345678",
+      "title": "Samsung Galaxy A35 5G Dual SIM 256 GB azul claro 8 GB RAM",
+      "price": 359.00,
+      "original_price": 359.00,
+      "currency": "USD",
+      "discount_percentage": 0,
+      "condition": "new",
+      "available_quantity": 120,
+      "sold_quantity": 796,
+      "images": [
+        "/images/samsung-a35-1.jpg",
+        "/images/samsung-a35-2.jpg",
+        "/images/samsung-a35-3.jpg"
+      ],
+      "thumbnail": "/images/samsung-a35-thumb.jpg",
+      "free_shipping": true,
+      "tags": ["new_release", "5g"],
+      "seller_id": "SELLER001",
+      "category_id": "MLB1055",
+      "created_at": "2024-08-01T10:00:00Z",
+      "updated_at": "2024-12-18T11:00:00Z"
+    },
+    {
+      "id": "MLB112233445",
+      "title": "Motorola Moto G84 5G 256 GB azul escuro 8 GB RAM",
+      "price": 329.00,
+      "original_price": 329.00,
+      "currency": "USD",
+      "discount_percentage": 0,
+      "condition": "new",
+      "available_quantity": 75,
+      "sold_quantity": 625,
+      "images": [
+        "/images/moto-g84-1.jpg",
+        "/images/moto-g84-2.jpg",
+        "/images/moto-g84-3.jpg"
+      ],
+      "thumbnail": "/images/moto-g84-thumb.jpg",
+      "free_shipping": true,
+      "tags": ["5g"],
+      "seller_id": "SELLER002",
+      "category_id": "MLB1055",
+      "created_at": "2024-05-20T12:00:00Z",
+      "updated_at": "2024-12-15T15:00:00Z"
+    },
+    {
+      "id": "MLB223344556",
+      "title": "Samsung Galaxy S23 256 GB preto 8 GB RAM",
+      "price": 959.00,
+      "original_price": 1299.00,
+      "currency": "USD",
+      "discount_percentage": 26,
+      "condition": "new",
+      "available_quantity": 30,
+      "sold_quantity": 1825,
+      "images": [
+        "/images/samsung-s23-1.jpg",
+        "/images/samsung-s23-2.jpg",
+        "/images/samsung-s23-3.jpg"
+      ],
+      "thumbnail": "/images/samsung-s23-thumb.jpg",
+      "free_shipping": true,
+      "tags": ["premium", "best_seller"],
+      "seller_id": "SELLER001",
+      "category_id": "MLB1055",
+      "created_at": "2024-04-01T08:00:00Z",
+      "updated_at": "2024-12-23T10:00:00Z"
+    },
+    {
+      "id": "MLB334455667",
+      "title": "Samsung Galaxy S23 Plus 512 GB verde 8 GB RAM",
+      "price": 1379.00,
+      "original_price": 1379.00,
+      "currency": "USD",
+      "discount_percentage": 0,
+      "condition": "new",
+      "available_quantity": 20,
+      "sold_quantity": 1185,
+      "images": [
+        "/images/samsung-s23plus-1.jpg",
+        "/images/samsung-s23plus-2.jpg",
+        "/images/samsung-s23plus-3.jpg"
+      ],
+      "thumbnail": "/images/samsung-s23plus-thumb.jpg",
+      "free_shipping": true,
+      "tags": ["premium"],
+      "seller_id": "SELLER001",
+      "category_id": "MLB1055",
+      "created_at": "2024-03-10T09:30:00Z",
+      "updated_at": "2024-12-24T12:00:00Z"
+    },
+    {
+      "id": "MLB445566778",
+      "title": "Samsung Galaxy S24 Ultra 512 GB preto 12 GB RAM",
+      "price": 1399.00,
+      "original_price": 1399.00,
+      "currency": "USD",
+      "discount_percentage": 0,
+      "condition": "new",
+      "available_quantity": 15,
+      "sold_quantity": 900,
+      "images": [
+        "/images/samsung-s24ultra-1.jpg",
+        "/images/samsung-s24ultra-2.jpg",
+        "/images/samsung-s24ultra-3.jpg"
+      ],
+      "thumbnail": "/images/samsung-s24ultra-thumb.jpg",
+      "free_shipping": true,
+      "tags": ["premium", "top_of_the_line"],
+      "seller_id": "SELLER001",
+      "category_id": "MLB1055",
+      "created_at": "2024-02-01T10:00:00Z",
+      "updated_at": "2024-12-25T14:00:00Z"
+    },
+    {
+      "id": "MLB556677889",
+      "title": "Motorola Edge 50 Pro 5G 512 GB preto 12 GB RAM",
+      "price": 799.00,
+      "original_price": 799.00,
+      "currency": "USD",
+      "discount_percentage": 0,
+      "condition": "new",
+      "available_quantity": 40,
+      "sold_quantity": 350,
+      "images": [
+        "/images/moto-edge50pro-1.jpg",
+        "/images/moto-edge50pro-2.jpg",
+        "/images/moto-edge50pro-3.jpg"
+      ],
+      "thumbnail": "/images/moto-edge50pro-thumb.jpg",
+      "free_shipping": true,
+      "tags": ["new_release", "5g"],
+      "seller_id": "SELLER002",
+      "category_id": "MLB1055",
+      "created_at": "2024-09-01T11:00:00Z",
+      "updated_at": "2024-12-26T16:00:00Z"
+    }
+  ]
+
+  
