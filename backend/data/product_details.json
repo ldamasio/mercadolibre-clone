@@ -1,0 +1,220 @@
+[
+  {
+    "id": "PD001",
+    "product_id": "MLB123456789",
+    "description": "Com um potente processador e 8 GB de RAM, seu desempenho logrará um alto rendimento com uma alta velocidade de transmissão de conteúdo e executará várias aplicações ao mesmo tempo, sem demoras. Desfrute de telas vibrantes e de alta qualidade com a tecnologia Super AMOLED.",
+    "features": {
+      "main": [
+        {
+          "name": "Memória interna",
+          "value": "256 GB"
+        },
+        {
+          "name": "Memória RAM",
+          "value": "8 GB"
+        },
+        {
+          "name": "Câmera traseira principal",
+          "value": "50 Mpx"
+        },
+        {
+          "name": "Câmera frontal principal",
+          "value": "32 Mpx"
+        },
+        {
+          "name": "Com NFC",
+          "value": "Sim"
+        },
+        {
+          "name": "Rede",
+          "value": "5G"
+        },
+        {
+          "name": "Dual SIM",
+          "value": "Sim"
+        },
+        {
+          "name": "Sistema operacional",
+          "value": "Android 14"
+        }
+      ],
+      "screen": {
+        "size": "6.6\"",
+        "resolution": "1080 x 2340 px",
+        "technology": "Super AMOLED"
+      },
+      "dimensions": {
+        "height": "161.1 mm",
+        "width": "77.4 mm",
+        "depth": "8.2 mm",
+        "weight": "213 g"
+      }
+    },
+    "payment_methods": [
+      "credit_card",
+      "debit_card",
+      "pix",
+      "bank_transfer",
+      "mercado_pago"
+    ],
+    "installments": {
+      "quantity": 12,
+      "amount": 36.58,
+      "rate": 0,
+      "currency": "USD"
+    },
+    "warranty_months": 12,
+    "warranty_type": "Garantia do vendedor",
+    "shipping": {
+      "free_shipping": true,
+      "logistic_type": "fulfillment",
+      "estimated_delivery": "Chegará entre segunda e quarta-feira"
+    },
+    "views_count": 15420
+  },
+  {
+    "id": "PD002",
+    "product_id": "MLB987654321",
+    "description": "O Motorola Edge 50 Fusion oferece desempenho excepcional com processador de última geração. Sua câmera de 50MP com OIS captura fotos incríveis em qualquer condição de luz. A tela P-OLED de 144Hz proporciona uma experiência visual fluida e imersiva.",
+    "features": {
+      "main": [
+        {
+          "name": "Memória interna",
+          "value": "256 GB"
+        },
+        {
+          "name": "Memória RAM",
+          "value": "8 GB"
+        },
+        {
+          "name": "Câmera traseira principal",
+          "value": "50 Mpx com OIS"
+        },
+        {
+          "name": "Câmera frontal",
+          "value": "32 Mpx"
+        },
+        {
+          "name": "Bateria",
+          "value": "5000 mAh"
+        },
+        {
+          "name": "Carregamento rápido",
+          "value": "68W"
+        },
+        {
+          "name": "Rede",
+          "value": "5G"
+        },
+        {
+          "name": "Processador",
+          "value": "Snapdragon 7s Gen 2"
+        }
+      ],
+      "screen": {
+        "size": "6.7\"",
+        "resolution": "1080 x 2400 px",
+        "technology": "P-OLED 144Hz"
+      },
+      "dimensions": {
+        "height": "161.9 mm",
+        "width": "73.1 mm",
+        "depth": "7.9 mm",
+        "weight": "174.9 g"
+      }
+    },
+    "payment_methods": [
+      "credit_card",
+      "debit_card",
+      "pix",
+      "mercado_pago"
+    ],
+    "installments": {
+      "quantity": 10,
+      "amount": 41.90,
+      "rate": 0,
+      "currency": "USD"
+    },
+    "warranty_months": 12,
+    "warranty_type": "Garantia do fabricante",
+    "shipping": {
+      "free_shipping": true,
+      "logistic_type": "cross_docking",
+      "estimated_delivery": "Chegará entre terça e quinta-feira"
+    },
+    "views_count": 8234
+  },
+  {
+    "id": "PD003",
+    "product_id": "MLB456789123",
+    "description": "O iPhone 15 Pro Max representa o ápice da tecnologia móvel. Com o revolucionário chip A17 Pro, câmeras profissionais e a nova Action Button, redefine o que um smartphone pode fazer. Construído em titânio aeroespacial para máxima durabilidade e leveza.",
+    "features": {
+      "main": [
+        {
+          "name": "Memória interna",
+          "value": "256 GB"
+        },
+        {
+          "name": "Chip",
+          "value": "A17 Pro"
+        },
+        {
+          "name": "Câmera principal",
+          "value": "48 Mpx ProRAW"
+        },
+        {
+          "name": "Zoom óptico",
+          "value": "5x"
+        },
+        {
+          "name": "Tela",
+          "value": "Always-On Display"
+        },
+        {
+          "name": "Dynamic Island",
+          "value": "Sim"
+        },
+        {
+          "name": "Material",
+          "value": "Titânio"
+        },
+        {
+          "name": "Action Button",
+          "value": "Sim"
+        }
+      ],
+      "screen": {
+        "size": "6.7\"",
+        "resolution": "2796 x 1290 px",
+        "technology": "Super Retina XDR OLED"
+      },
+      "dimensions": {
+        "height": "159.9 mm",
+        "width": "76.7 mm",
+        "depth": "8.25 mm",
+        "weight": "221 g"
+      }
+    },
+    "payment_methods": [
+      "credit_card",
+      "debit_card",
+      "pix",
+      "apple_pay",
+      "mercado_pago"
+    ],
+    "installments": {
+      "quantity": 12,
+      "amount": 114.92,
+      "rate": 0,
+      "currency": "USD"
+    },
+    "warranty_months": 12,
+    "warranty_type": "Garantia Apple",
+    "shipping": {
+      "free_shipping": true,
+      "logistic_type": "fulfillment",
+      "estimated_delivery": "Chegará amanhã"
+    },
+    "views_count": 28543
+  }
+]

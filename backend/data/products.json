@@ -1,4 +1,3 @@
-// backend/data/products.json
 [
     {
       "id": "MLB123456789",
@@ -235,4 +234,3 @@
     }
   ]
 
-  
