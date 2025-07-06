@@ -1,0 +1,8 @@
+### Get Related Products (Default Limit)
+GET http://localhost:8080/api/products/MLB123456789/related
+Accept: application/json
+
+### Get Related Products (Custom Limit)
+GET http://localhost:8080/api/products/MLB123456789/related?limit=5
+Accept: application/json
+

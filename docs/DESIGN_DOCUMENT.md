@@ -319,6 +319,16 @@ func (r *PostgresRepository) GetProductByID(id string) (*models.Product, error) 
 - Métricas com Prometheus
 - Logs estruturados com contexto
 
+### 4. Paginação
+- Implementar paginação e filtros nas respostas da API para endpoints que retornam listas
+- Garante que a API continue performática mesmo com crescimento do volume de dados.
+- Permite navegação fluida em catálogos extensos no frontend.
+
+### 5. Rate Limiting
+- Implementar Rate Limiting usando middleware simples com memória local.
+- Previne DoS e abuso de endpoints públicos.
+- proteger a API contra uso excessivo ou malicioso.
+
 ## Conclusão
 
 A arquitetura escolhida balanceia:
