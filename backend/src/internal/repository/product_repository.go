@@ -17,6 +17,9 @@ var (
 	ErrSellerNotFound  = errors.New("seller not found")
 )
 
+// Ensure ProductRepository implements ProductRepositoryInterface
+var _ ProductRepositoryInterface = (*ProductRepository)(nil)
+
 // ProductRepository handles product data operations
 type ProductRepository struct {
 	dataPath string
