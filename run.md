@@ -12,7 +12,7 @@
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/ldamasio/mercadolibre-clone
 cd mercadolibre-clone
 
 # Make scripts executable
