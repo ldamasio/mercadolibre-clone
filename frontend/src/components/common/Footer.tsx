@@ -3,44 +3,41 @@ import React from 'react';
 
 export function Footer() {
   return (
-    <footer className="bg-white border-t mt-16">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-4 gap-8 mb-8">
-          <div>
-            <h3 className="font-semibold mb-4">Sobre</h3>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li><a href="#" className="hover:text-blue-600">Mercado Libre</a></li>
-              <li><a href="#" className="hover:text-blue-600">Investor relations</a></li>
-              <li><a href="#" className="hover:text-blue-600">Tendências</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold mb-4">Outros sites</h3>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li><a href="#" className="hover:text-blue-600">Desenvolvedores</a></li>
-              <li><a href="#" className="hover:text-blue-600">Mercado Pago</a></li>
-              <li><a href="#" className="hover:text-blue-600">Mercado Shops</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold mb-4">Ajuda</h3>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li><a href="#" className="hover:text-blue-600">Comprar</a></li>
-              <li><a href="#" className="hover:text-blue-600">Vender</a></li>
-              <li><a href="#" className="hover:text-blue-600">Resolução de problemas</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold mb-4">Redes sociais</h3>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li><a href="#" className="hover:text-blue-600">Twitter</a></li>
-              <li><a href="#" className="hover:text-blue-600">Facebook</a></li>
-              <li><a href="#" className="hover:text-blue-600">Instagram</a></li>
-            </ul>
-          </div>
+    <footer className="bg-white border-t mt-8 desktop:mt-16">
+      <div className="px-4 py-6 desktop:py-8 max-w-7xl mx-auto">
+        {/* App Promotion */}
+        <div className="bg-yellow-400 py-2 flex justify-center items-center">
+          <img src="/path/to/logo.png" alt="Logo" className="h-6 mr-2" />
+          <span className="font-semibold">¡Comprá y vendé con la app!</span>
         </div>
-        <div className="border-t pt-4 text-center text-sm text-gray-600">
-          <p>Copyright © 1999-2024 Ebazar.com.br LTDA.</p>
+
+        {/* Account Links */}
+        <div className="flex justify-start mt-4 mb-4">
+          <a href="#" className="mr-4 text-blue-600">Ingresá</a>
+          <a href="#" className="text-blue-600">Creá tu cuenta</a>
+        </div>
+
+        {/* Links */}
+        <div className="flex flex-wrap justify-center text-gray-800 text-sm space-x-4">
+          <a href="#">Términos y condiciones</a>
+          <a href="#">Promociones</a>
+          <a href="#">Cómo cuidamos tu privacidad</a>
+          <a href="#">Accesibilidad</a>
+          <a href="#">Información al usuario financiero</a>
+          <a href="#">Defensa del Consumidor</a>
+          <a href="#">Información sobre seguros</a>
+          <a href="#">Blog</a>
+          <a href="#">Tendencias</a>
+        </div>
+
+        {/* Copyright and Address */}
+        <div className="border-t pt-4 text-center">
+          <p className="text-xs text-gray-500">
+            © 1999-2025 MercadoLibre S.R.L.
+          </p>
+          <p className="text-xs text-gray-600">
+            Av. Caseros 3039, Piso 2, CP 1264, Parque Patricios, CABA
+          </p>
         </div>
       </div>
     </footer>

@@ -6,7 +6,15 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'desktop': '720px',
+      },
+      colors: {
+        'custom-gray': '#ededed',
+        'custom-yellow-300': '#ffe600',
+      },
+    },
   },
   plugins: [],
 }
