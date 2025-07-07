@@ -3,7 +3,7 @@
 // Testa se o componente Button aplica a classe `w-full` quando fullWidth=true.
 // Testa se o componente Button aplica classes de tamanho e variante corretas.
 import { render, screen } from '@testing-library/react';
-import Button from './Button';
+import { Button } from './Button';
 
 describe('Button component', () => {
   it('deve renderizar o texto passado via props', () => {
@@ -18,7 +18,7 @@ describe('Button component', () => {
   it('aplica classes de tamanho e variante corretas', () => {
     render(<Button variant="secondary" size="sm">Teste</Button>);
     const btn = screen.getByRole('button');
-    expect(btn).toHaveClass('px-3 py-1.5 text-sm');
-    expect(btn).toHaveClass('bg-white border');
+    expect(btn).toHaveClass('px-3 py-1 text-sm');
+    expect(btn).toHaveClass('bg-gray-200 text-gray-800');
   });
 });

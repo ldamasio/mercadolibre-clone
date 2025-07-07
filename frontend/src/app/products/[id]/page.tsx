@@ -11,7 +11,7 @@ import { ProductInfo } from '@/components/product/ProductInfo';
 import { ProductPrice } from '@/components/product/ProductPrice';
 import { SellerInfo } from '@/components/product/SellerInfo';
 import { ProductFeatures } from '@/components/product/ProductFeatures';
-import Button from '@/components/ui/Button';
+import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Loading } from '@/components/ui/Loading';
 import { ErrorMessage } from '@/components/ui/ErrorMessage';

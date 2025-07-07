@@ -1,20 +1,16 @@
+
+// frontend/src/components/ui/Card.tsx
 import React from 'react';
 
 interface CardProps {
   children: React.ReactNode;
-  padding?: boolean;
   className?: string;
+  padding?: boolean;
 }
 
-export function Card({ children, padding = true, className = '' }: CardProps) {
+export function Card({ children, className = '', padding = true }: CardProps) {
   return (
-    <div
-      className={
-        `bg-white border border-gray-200 rounded shadow-sm ${
-          padding ? 'p-4' : ''
-        } ${className}`.trim()
-      }
-    >
+    <div className={`bg-white rounded-lg shadow-sm ${padding ? 'p-4' : ''} ${className}`}>
       {children}
     </div>
   );

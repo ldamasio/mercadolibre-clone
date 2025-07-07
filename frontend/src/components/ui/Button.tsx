@@ -1,14 +1,13 @@
+// frontend/src/components/ui/Button.tsx
 import React from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
-  className?: string;
 }
 
-export default function Button({
+export function Button({
   children,
   variant = 'primary',
   size = 'md',
@@ -16,30 +15,26 @@ export default function Button({
   className = '',
   ...props
 }: ButtonProps) {
-  const baseClasses = 'font-medium rounded focus:outline-none focus:ring-2 focus:ring-offset-2';
-  const variantClasses =
-    variant === 'primary'
-      ? 'bg-blue-500 hover:bg-blue-600 text-white focus:ring-blue-400'
-      : 'bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 focus:ring-gray-200';
-  let sizeClasses: string;
-  switch (size) {
-    case 'sm':
-      sizeClasses = 'px-3 py-1.5 text-sm';
-      break;
-    case 'lg':
-      sizeClasses = 'px-6 py-3 text-lg';
-      break;
-    default:
-      sizeClasses = 'px-4 py-2 text-base';
-  }
+  const baseStyles = 'font-semibold rounded transition-colors focus:outline-none focus:ring-2';
+  
+  const variants = {
+    primary: 'bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-300',
+    secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-300',
+    outline: 'border-2 border-blue-500 text-blue-500 hover:bg-blue-50 focus:ring-blue-300'
+  };
+  
+  const sizes = {
+    sm: 'px-3 py-1 text-sm',
+    md: 'px-4 py-2 text-base',
+    lg: 'px-6 py-3 text-lg'
+  };
+  
   const widthClass = fullWidth ? 'w-full' : '';
-
+  
   return (
     <button
+      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${widthClass} ${className}`}
       {...props}
-      className={[baseClasses, variantClasses, sizeClasses, widthClass, className]
-        .filter(Boolean)
-        .join(' ')}
     >
       {children}
     </button>
