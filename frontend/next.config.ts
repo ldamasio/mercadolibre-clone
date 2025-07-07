@@ -1,7 +1,9 @@
-import type { NextConfig } from "next";
+/** @type {import('next').NextConfig} */
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
+const nextConfig = {
+  turbopack: {
+    // your custom rules / aliases here
+  },
+}
 
-export default nextConfig;
+export default nextConfig
