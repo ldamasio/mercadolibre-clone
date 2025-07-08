@@ -19,7 +19,7 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
   }
 
   return (
-    <div className="flex flex-col md:flex-row gap-2 md:gap-4">
+    <div className="border-2 border-orange-500 w-[478px] flex flex-col md:flex-row gap-2 md:gap-4">
       {/* Mobile - Thumbnails as dots */}
       <div className="md:hidden flex justify-center gap-2 order-2">
         {images.map((_, index) => (
@@ -35,12 +35,12 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
       </div>
 
       {/* Desktop - Thumbnails */}
-      <div className="hidden md:flex flex-col gap-2">
+      <div className="border-2 border-blue-500 w-[56px] h-[384px] hidden md:flex flex-col gap-2 mt-6 ml-6">
         {images.map((image, index) => (
           <button
             key={index}
             onClick={() => setSelectedImage(index)}
-            className={`w-12 h-12 border-2 rounded overflow-hidden ${
+            className={`w-[54px] h-[54px] border-2 rounded overflow-hidden ${
               selectedImage === index ? 'border-blue-500' : 'border-gray-300'
             }`}
           >
@@ -54,7 +54,7 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
       </div>
 
       {/* Main image */}
-      <div className="flex-1 order-1 md:order-2">
+      <div className="border-2 border-green-500 w-[340px] flex-1 order-1 md:order-2">
         <div className="relative w-full h-80 md:h-[500px] bg-white rounded-lg overflow-hidden">
           <img
             src={images[selectedImage]}

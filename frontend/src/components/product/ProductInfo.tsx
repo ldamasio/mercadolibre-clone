@@ -8,7 +8,7 @@ interface ProductInfoProps {
 
 export function ProductInfo({ product }: ProductInfoProps) {
   return (
-    <div className="mb-6">
+    <div className="border-2 border-blue-500 mb-6">
       <p className="text-sm text-gray-500 mb-1">
         {product.condition === 'new' ? 'Novo' : 'Usado'} | {product.sold_quantity} vendidos
       </p>
