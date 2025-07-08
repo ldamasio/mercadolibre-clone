@@ -45,7 +45,7 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
             }`}
           >
             <img
-              src={image}
+              src={`http://localhost:3000/${image}`}
               alt={`${title} - ${index + 1}`}
               className="w-full h-full object-cover"
             />
@@ -57,7 +57,7 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
       <div className="border-2 border-green-500 w-[340px] flex-1 order-1 md:order-2">
         <div className="relative w-full h-80 md:h-[500px] bg-white rounded-lg overflow-hidden">
           <img
-            src={images[selectedImage]}
+            src={`http://localhost:3000/${images[selectedImage]}`}
             alt={title}
             className="w-full h-full object-contain"
           />
