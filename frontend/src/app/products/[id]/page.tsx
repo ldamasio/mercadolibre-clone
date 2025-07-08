@@ -78,9 +78,12 @@ export default function ProductPage() {
 
 
 
-            <div className="flex">
 
-              <Card padding={false} className="bg-white overflow-x-auto">
+
+
+            <div className="border-6 border-green-500 flex">
+
+              <Card padding={false} className="border-6 border-yellow-500 w-[478px] bg-white overflow-x-auto">
                 <div className="p-4">
                   <ProductGallery images={product.images} title={product.title} />
                 </div>
