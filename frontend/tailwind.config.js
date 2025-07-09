@@ -9,6 +9,8 @@ module.exports = {
       colors: {
         'custom-gray': '#ededed',
         'custom-yellow-300': '#ffe600',
+        'ml-green': '#00b25c',
+        'custom-blue': '#3483faff',
       },
     },
   },

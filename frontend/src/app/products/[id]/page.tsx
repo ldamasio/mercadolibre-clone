@@ -59,40 +59,67 @@ export default function ProductPage() {
     <div className="min-h-screen bg-custom-gray">
       <Header />
 
-      <main className="border-2 border-blue-500 w-full flex flex-col items-center">
-        <div className="border-2 border-red-500 w-[1184px] mx-auto">
+      {/* Main Features */}
+      <main className="w-full flex flex-col items-center">
+
+        {/* Desktop only - Title here */}
+        <div className="block max-[720px]:hidden w-[1184px] mx-auto">
           <div className="mb-4 text-sm w-full">
             <Breadcrumb items={breadcrumbItems} />
           </div>
 
-          <div className="border-3 border-green-500 mb-4 desktop:mb-0 desktop:w-[478px] desktop:mx-auto px-4 py-4 overflow-x-auto">
+          <div className="mb-4 px-4 py-4 overflow-x-auto">
             <p>
               Volver
             </p>
 
+
+
             {/* Product Details Section Desktop */}
-            <div className="border-6 border-purple-500 flex">
+            <div className="border-2 border-purple-500 flex">
 
 
-            <div className="border-2 border-blue-500 w-[478px] flex flex-col md:flex-row gap-2 md:gap-4">
+              <div className="border-6 border-blue-500 w-[478px]">
 
-              <Card padding={false} className="border-6 border-yellow-500 w-[478px] bg-white overflow-x-auto">
-                <div className="p-4">
+                <div>
+                  adascadcasccds
+                </div>
+
+                <div className="border-2 border-red-500">
                   <ProductGallery images={product.images} title={product.title} />
                 </div>
-              </Card>
+
+
+                <div>
+                  Descrição.
+                </div>
+
+
               </div>
 
 
 
 
 
-              {/* Main Features */}
               {/* Desktop only - Title here */}
               <div className="flex">
-                <div className="border-6 border-orange-500 block max-[720px]:hidden mb-4">
+                <div className="block max-[720px]:hidden mb-4">
                   <ProductInfo product={product} />
                   <ProductPrice product={product} installments={product_detail.installments} />
+
+                  {/* Features Column - Fixed width 340px */}
+                  <div className="border-6 border-black-500 desktop:w-[340px] desktop:flex-col">
+
+                    {/* Color selector (if applicable) */}
+                    <Card className="mb-4">
+                      <h3 className="text-base font-medium mb-3">Color: Azul oscuro</h3>
+                      <div className="flex gap-2">
+                        <button className="w-12 h-12 rounded-full bg-blue-900 border-2 border-blue-500"></button>
+                        <button className="w-12 h-12 rounded-full bg-gray-800 border-2 border-gray-300"></button>
+                      </div>
+                    </Card>
+                  </div>
+
                   <Card className="mb-4">
                     <h3 className="text-base font-medium mb-4">Lo que tienes que saber de este producto</h3>
                     <ul className="space-y-2">
@@ -107,183 +134,188 @@ export default function ProductPage() {
                       Ver características
                     </button>
                   </Card>
-                  </div>
 
-                  {/* Right Column - Purchase Card (Desktop) - Fixed width 309px */}
-                  <div className="border-6 border-red-500 w-[325px] float-left block max-[720px]:hidden w-[300px] flex-shrink-0 flex-grow-0">
-                    <Card className="sticky top-4 w-[325px]">
-                      {/* Price Section */}
-                      {/* <ProductPrice product={product} installments={product_detail.installments} /> */}
+                </div>
 
-                      {/* Promo Badge */}
-                      <div className="mb-4 text-xs">
-                        <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded">
-                          OFERTA DEL DÍA
-                        </span>
-                      </div>
+                {/* Right Column - Purchase Card (Desktop) - Fixed width 309px */}
+                <div className="border-6 border-red-500 w-[325px] float-left block max-[720px]:hidden flex-shrink-0 flex-grow-0">
+                  <Card className="!pl-2 !pr-2 !ml-2 !mr-2 !mt-2 !mb-2 top-4 text-sm border-2 border-gray-300">
+                    <div className="!mt-4">
+                      <span className="text-green-600">Envío gratis</span> a todo el país
+                    </div>
+                    <div className="text-sm text-gray-400">
+                      Conace los termpos y las formas de envio
+                    </div>
 
-                      {/* Stock */}
-                      <p className="text-sm mb-4">
+                    <div className="text-sm text-blue-400">
+                      Calcular cuando lega
+                    </div>
+
+                    {/* Stock */}
+                    <div className="!mt-6 !mb-6">
+                      <p className="text-sm font-bold">
                         Stock disponible
                       </p>
 
-                      {/* Quantity Selector */}
-                      <div className="mb-4">
-                        <span className="text-sm">Cantidad: </span>
-                        <span className="font-medium">1 unidad</span>
-                        <span className="text-xs text-gray-500 ml-2">
+                    </div>
+
+                    {/* Quantity Selector */}
+                    <div className="mb-4 flex w-full">
+                      <span> </span>
+                      <span className="text-sm">Cantidad:
+                      </span>
+                      <span className="font-medium !ml-2">1 unidad</span>
+                      <span className="text-xs text-gray-500 !ml-4 !mt-[-4px]">
+                          <svg className="w-4 h-4 inline mx-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                      </span>
+                      <span className="text-xs text-gray-500 !ml-2">
+                        <div>
                           ({product.available_quantity} disponibles)
-                        </span>
-                      </div>
+                        </div>
+                      </span>
+                    </div>
 
-                      {/* Action Buttons */}
-                      <div className="space-y-2 mb-4">
-                        <Button variant="primary" size="lg" fullWidth>
-                          Comprar ahora
-                        </Button>
-                        <Button variant="secondary" size="lg" fullWidth>
-                          Agregar al carrito
-                        </Button>
-                      </div>
+                    {/* Action Buttons */}
+                    <div className="space-y-2 !mb-4 !mt-4">
+                      <Button variant="primary" size="lg" fullWidth className="!py-1.5 !px-4">
+                        Comprar ahora
+                      </Button>
+                      <Button variant="secondary" size="lg" fullWidth className="!py-1.5 !px-4 !mt-2">
+                        Agregar al carrito
+                      </Button>
+                    </div>
 
-                      {/* Official Store Badge */}
-                      <div className="flex items-center gap-2 mb-4 p-3 bg-gray-50 rounded">
-                        <span className="text-sm font-medium">Tienda oficial</span>
-                        <span className="text-xl font-bold text-blue-600">Samsung</span>
-                        <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
-                      </div>
+                    {/* Official Store Badge */}
+                    <div className="flex items-center gap-2 mb-4 p-3 bg-gray-50 rounded">
+                      <span className="text-sm font-medium">Tienda oficial</span>
+                      <span className="text-xl font-bold text-blue-600">Samsung</span>
+                      <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                    </div>
 
-                      {/* Seller Rating */}
+                    {/* Seller Rating */}
+                    <div className="flex">
+
+                      <div>
+                        brandlogo
+                      </div>
                       <div className="text-xs text-gray-600 mb-4">
-                        <p>+10mil ventas</p>
+                        <p className="text-black font-bold">+10mil ventas</p>
+                      </div>
+                    </div>
+
+                    {/* Benefits */}
+                    <div className="!mt-6 space-y-3 text-sm">
+                      <div className="flex items-start gap-2">
+                        <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <div>
+                          <p className="font-medium">Devolución gratis</p>
+                          <p className="text-xs text-gray-600">Tienes 30 días desde que lo recibes</p>
+                        </div>
                       </div>
 
-                      {/* Benefits */}
-                      <div className="space-y-3 text-sm">
-                        <div className="flex items-start gap-2">
-                          <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          <div>
-                            <p className="font-medium">Devolución gratis</p>
-                            <p className="text-xs text-gray-600">Tienes 30 días desde que lo recibes</p>
-                          </div>
-                        </div>
-
-                        <div className="flex items-start gap-2">
-                          <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          <div>
-                            <p className="font-medium">Compra Protegida</p>
-                            <p className="text-xs text-gray-600">recibe el producto que esperabas o te devolvemos tu dinero</p>
-                          </div>
-                        </div>
-
-                        <div className="flex items-start gap-2">
-                          <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          <div>
-                            <p className="font-medium">1 año de garantía de fábrica</p>
-                          </div>
+                      <div className="flex items-start gap-2">
+                        <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <div>
+                          <p className="font-medium">Compra Protegida</p>
+                          <p className="text-xs text-gray-600">recibe el producto que esperabas o te devolvemos tu dinero</p>
                         </div>
                       </div>
-                    </Card>
 
-                    {/* Payment Methods */}
-                    <Card className="mt-4">
-                      <h3 className="font-medium mb-3">Medios de pago</h3>
-
-                      <div className="space-y-3">
+                      <div className="flex items-start gap-2">
+                        <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
                         <div>
-                          <p className="text-sm font-medium mb-2">Hasta 12 cuotas sin tarjeta</p>
-                          <div className="bg-green-600 text-white text-xs px-2 py-1 rounded inline-block">
-                            Mercado Crédito
-                          </div>
+                          <p className="font-medium">1 año de garantía de fábrica</p>
                         </div>
+                      </div>
+                    </div>
 
-                        <div>
-                          <p className="text-sm font-medium mb-2">Tarjetas de crédito</p>
-                          <p className="text-xs text-gray-600 mb-2">¡Cuotas sin interés con bancos seleccionados!</p>
-                          <div className="flex gap-2">
-                            <div className="w-10 h-6 bg-gray-200 rounded"></div>
-                            <div className="w-10 h-6 bg-gray-200 rounded"></div>
-                            <div className="w-10 h-6 bg-gray-200 rounded"></div>
-                          </div>
+
+                  </Card>
+
+                  {/* Payment Methods */}
+
+                  <Card className="!pl-2 !pr-2 !pt-4 !ml-2 !mr-2 !mt-8 !mb-2 text-sm border-2 border-gray-300">
+                    <h3 className="font-medium mb-3">Medios de pago</h3>
+
+                    <div className="space-y-3">
+                      <div>
+                        <p className="text-sm font-medium mb-2">Hasta 12 cuotas sin tarjeta</p>
+                        <div className="bg-green-600 text-white text-xs px-2 py-1 rounded inline-block">
+                          Mercado Crédito
                         </div>
+                      </div>
 
-                        <div>
-                          <p className="text-sm font-medium mb-2">Tarjetas de débito</p>
-                          <div className="flex gap-2">
-                            <div className="w-10 h-6 bg-gray-200 rounded"></div>
-                            <div className="w-10 h-6 bg-gray-200 rounded"></div>
-                          </div>
-                        </div>
-
-                        <div>
-                          <p className="text-sm font-medium mb-2">Efectivo</p>
+                      <div>
+                        <p className="text-sm font-medium mb-2">Tarjetas de crédito</p>
+                        <p className="text-xs text-gray-600 mb-2">¡Cuotas sin interés con bancos seleccionados!</p>
+                        <div className="flex gap-2">
+                          <div className="w-10 h-6 bg-gray-200 rounded"></div>
+                          <div className="w-10 h-6 bg-gray-200 rounded"></div>
                           <div className="w-10 h-6 bg-gray-200 rounded"></div>
                         </div>
-
-                        <a href="#" className="text-sm text-blue-600 hover:underline">
-                          Conocer otros medios de pago
-                        </a>
                       </div>
-                    </Card>
-                  </div>
 
-              </div>
+                      <div>
+                        <p className="text-sm font-medium mb-2">Tarjetas de débito</p>
+                        <div className="flex gap-2">
+                          <div className="w-10 h-6 bg-gray-200 rounded"></div>
+                          <div className="w-10 h-6 bg-gray-200 rounded"></div>
+                        </div>
+                      </div>
 
+                      <div>
+                        <p className="text-sm font-medium mb-2">Efectivo</p>
+                        <div className="w-10 h-6 bg-gray-200 rounded"></div>
+                      </div>
 
-
-
-              {/* Product Details Section Mobile */}
-
-              {/* Mobile only - Title and Price */}
-              <div className="hidden max-[720px]:block mt-4">
-                <Card>
-                  <ProductInfo product={product} />
-                  {/* <ProductPrice product={product} installments={product_detail.installments} /> */}
-                </Card>
-                {/* Features Column - Fixed width 340px */}
-                <div className="border-6 border-black-500 desktop:w-[340px] desktop:flex-col">
-
-                  {/* Color selector (if applicable) */}
-                  <Card className="mb-4">
-                    <h3 className="text-base font-medium mb-3">Color: Azul oscuro</h3>
-                    <div className="flex gap-2">
-                      <button className="w-12 h-12 rounded-full bg-blue-900 border-2 border-blue-500"></button>
-                      <button className="w-12 h-12 rounded-full bg-gray-800 border-2 border-gray-300"></button>
+                      <a href="#" className="text-sm text-blue-600 hover:underline">
+                        Conocer otros medios de pago
+                      </a>
                     </div>
                   </Card>
                 </div>
-              </div>
 
-              {/* Mobile Purchase Section */}
-              <div className="hidden max-[720px]:block mt-4 space-y-4">
-                <Card>
-                  <div className="space-y-2 mb-4">
-                    <Button variant="primary" size="lg" fullWidth>
-                      Comprar ahora
-                    </Button>
-                    <Button variant="secondary" size="lg" fullWidth>
-                      Agregar al carrito
-                    </Button>
-                  </div>
-
-                  <SellerInfo seller={seller} />
-                </Card>
               </div>
             </div>
+          </div>
+        </div>
 
+
+        {/* Mobile only - Title and Price */}
+        {/* Product Details Section Mobile */}
+        <div>
+          <div className="hidden max-[720px]:block mt-4">
+            <Card>
+              <ProductInfo product={product} />
+              {/* <ProductPrice product={product} installments={product_detail.installments} /> */}
+            </Card>
           </div>
 
+          {/* Mobile Purchase Section */}
+          <div className="hidden max-[720px]:block mt-4 space-y-4">
+            <Card>
+              <div className="space-y-2 mb-4">
+                <Button variant="primary" size="lg" fullWidth>
+                  Comprar ahora
+                </Button>
+                <Button variant="secondary" size="lg" fullWidth>
+                  Agregar al carrito
+                </Button>
+              </div>
 
-
-
+              <SellerInfo seller={seller} />
+            </Card>
+          </div>
         </div>
 
       </main>
