@@ -25,6 +25,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faCcVisa, faCcMastercard } from '@fortawesome/free-brands-svg-icons';
+import { ProductFeatures } from '@/components/product/ProductFeatures';
 
 
 export default function ProductPage() {
@@ -106,9 +107,7 @@ export default function ProductPage() {
             <div className="flex">
               <div className="w-[478px]">
                 <ProductGallery images={product.images} title={product.title} />
-                <div>
-                  Descrição.
-                </div>
+                <ProductFeatures features={product_detail.features} description={product_detail.description} />
               </div>
 
               {/* Desktop only - Title here */}
