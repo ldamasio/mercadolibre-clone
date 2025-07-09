@@ -68,7 +68,7 @@ export default function ProductPage() {
       <main className="w-full flex flex-col items-center">
 
         {/* Desktop only */}
-        <div className="block max-[720px]:hidden w-[1184px] mx-auto">
+        <div className="block max-[720px]:hidden w-[1184px] mx-auto bg-white">
           <div className="!mt-6 !mb-4 text-sm text-bold text-black w-full">
             <span className="text-black !text-bold !mr-2"><strong>También puede interesarte:</strong></span>
             {[

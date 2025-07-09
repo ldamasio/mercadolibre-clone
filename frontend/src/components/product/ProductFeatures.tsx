@@ -20,8 +20,7 @@ const featureIconMap: Record<string, any> = {
   'Largura': faRulerCombined,
   'Profundidade': faRulerCombined,
   'Huella dactilar': faFingerprint,
-  'Con NFC': faWifi, // substituído faNfcSymbol por faWifi
-  // ...adicione outros mapeamentos conforme necessário
+  'Con NFC': faWifi,
 };
 
 function getFeatureIcon(name: string) {
@@ -106,23 +105,24 @@ export function ProductFeatures({ features, description }: ProductFeaturesProps)
       )}
 
       {/* BODY: Grid 2 colunas, alinhamento customizado */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-6">
+      <div className="h-60 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-6">
         {/* Lado esquerdo */}
         <div className="border-4 border-blue-300 flex flex-col gap-4">
+          {/* Cada feature em sua própria linha */}
           {features.main?.find(f => f.name.toLowerCase().includes('memoria interna')) && (
-            <div className="flex items-center">
+            <div className="flex flex-row items-center w-full">
               <FontAwesomeIcon icon={getFeatureIcon('Memoria interna')} className="text-gray-500 mr-3 w-5 h-5" />
               <span className="text-sm text-gray-700"><span className="font-medium">Memoria interna:</span> <span className="font-bold">{features.main.find(f => f.name.toLowerCase().includes('memoria interna'))?.value}</span></span>
             </div>
           )}
           {features.main?.find(f => f.name.toLowerCase().includes('cámara trasera')) && (
-            <div className="flex items-center">
+            <div className="flex flex-row items-center w-full">
               <FontAwesomeIcon icon={getFeatureIcon('Cámara trasera principal')} className="text-gray-500 mr-3 w-5 h-5" />
               <span className="text-sm text-gray-700"><span className="font-medium">Cámara trasera principal:</span> <span className="font-bold">{features.main.find(f => f.name.toLowerCase().includes('cámara trasera'))?.value}</span></span>
             </div>
           )}
           {features.main?.find(f => f.name.toLowerCase().includes('nfc')) && (
-            <div className="flex items-center">
+            <div className="flex flex-row items-center w-full">
               <FontAwesomeIcon icon={getFeatureIcon('Con NFC')} className="text-gray-500 mr-3 w-5 h-5" />
               <span className="text-sm text-gray-700"><span className="font-medium">Con NFC:</span> <span className="font-bold">{features.main.find(f => f.name.toLowerCase().includes('nfc'))?.value}</span></span>
             </div>
@@ -159,8 +159,8 @@ export function ProductFeatures({ features, description }: ProductFeaturesProps)
 
       {/* Descrição do produto */}
       <div
-        className="mt-6 pl-24 pr-24 relative left-1/2 -translate-x-1/2"
-        style={{ width: 851, maxWidth: '100vw' }}
+        className="mt-6 pl-24 pr-24 text-left"
+        style={{ width: 800, maxWidth: '851px', direction: 'ltr' }}
       >
         <h3 className="font-semibold mb-2 text-base">Descripción</h3>
         <p className="text-gray-700 leading-relaxed text-sm" style={{ whiteSpace: 'pre-line' }}>
