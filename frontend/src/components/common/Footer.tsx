@@ -7,19 +7,14 @@ export function Footer() {
       <div className="border-3 border-blue-300 w-[1184px] h-24 mx-auto flex flex-wrap">
         <div className="px-4 py-6 desktop:py-8 max-w-7xl mx-auto">
           {/* App Promotion */}
-          <div className="bg-yellow-400 py-2 flex justify-center items-center">
-            <img src="/path/to/logo.png" alt="Logo" className="h-6 mr-2" />
+          <div className="bg-white py-2 flex justify-center items-center">
             <span className="font-semibold">¡Comprá y vendé con la app!</span>
           </div>
 
-          {/* Account Links */}
-          <div className="flex justify-start mt-4 mb-4">
-            <a href="#" className="mr-4 text-blue-600">Ingresá</a>
-            <a href="#" className="text-blue-600">Creá tu cuenta</a>
-          </div>
 
           {/* Links */}
-          <div className="flex flex-wrap justify-center text-gray-800 text-sm space-x-4">
+          <div className="flex flex-wrap justify-center text-gray-800 text-xs gap-x-4">
+            <a href="#">Trabajá con nosotros</a>
             <a href="#">Términos y condiciones</a>
             <a href="#">Promociones</a>
             <a href="#">Cómo cuidamos tu privacidad</a>
@@ -32,7 +27,7 @@ export function Footer() {
           </div>
 
           {/* Copyright and Address */}
-          <div className="border-t pt-4 flex flex-col items-center justify-center">
+          <div className="border-t pt-4 flex flex-col text-left">
             <p className="text-xs text-gray-500">
               © 1999-2025 MercadoLibre S.R.L.
             </p>
