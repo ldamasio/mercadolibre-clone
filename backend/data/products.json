@@ -10,12 +10,14 @@
       "available_quantity": 150,
       "sold_quantity": 1769,
       "images": [
-        "/images/samsung-a55-1.jpg",
-        "/images/samsung-a55-2.jpg",
-        "/images/samsung-a55-3.jpg",
-        "/images/samsung-a55-4.jpg"
+        "/images/s55-01.webp",
+        "/images/s55-02.webp",
+        "/images/s55-03.webp",
+        "/images/s55-05.webp",
+        "/images/s55-06.webp",
+        "/images/s55-08.webp"
       ],
-      "thumbnail": "/images/samsung-a55-thumb.jpg",
+      "thumbnail": "/images/s55-01.webp",
       "free_shipping": true,
       "tags": ["best_seller", "brand_official", "immediate_delivery"],
       "seller_id": "SELLER001",

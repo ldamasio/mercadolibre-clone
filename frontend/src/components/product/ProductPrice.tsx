@@ -17,7 +17,7 @@ export function ProductPrice({ product, installments }: ProductPriceProps) {
   };
 
   return (
-    <div className="mb-6">
+    <div className="border-2 border-red-500 mb-6">
       {product.original_price && product.original_price > product.price && (
         <p className="text-sm text-gray-500 line-through">
           {formatPrice(product.original_price)}
