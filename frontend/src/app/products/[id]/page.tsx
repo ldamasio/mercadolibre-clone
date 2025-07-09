@@ -16,6 +16,17 @@ import { Loading } from '@/components/ui/Loading';
 import { ErrorMessage } from '@/components/ui/ErrorMessage';
 import { useProduct } from '@/hooks/useProduct';
 
+import {
+  faBars,
+  faShoppingCart,
+  faCheckCircle,
+  faMemory,
+  faTv,
+} from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faCcVisa, faCcMastercard } from '@fortawesome/free-brands-svg-icons';
+
+
 export default function ProductPage() {
   const params = useParams();
   const productId = params.id as string;
@@ -48,13 +59,6 @@ export default function ProductPage() {
 
   const { product, product_detail, seller } = data;
 
-  const breadcrumbItems = [
-    { label: 'Início', href: '/' },
-    { label: 'Celulares e Telefones', href: '#' },
-    { label: 'Celulares e Smartphones', href: '#' },
-    { label: product.title }
-  ];
-
   return (
     <div className="min-h-screen bg-custom-gray">
       <Header />
@@ -62,49 +66,55 @@ export default function ProductPage() {
       {/* Main Features */}
       <main className="w-full flex flex-col items-center">
 
-        {/* Desktop only - Title here */}
+        {/* Desktop only */}
         <div className="block max-[720px]:hidden w-[1184px] mx-auto">
-          <div className="mb-4 text-sm w-full">
-            <Breadcrumb items={breadcrumbItems} />
+          <div className="!mt-6 !mb-4 text-sm text-bold text-black w-full">
+            <span className="text-black !text-bold !mr-2"><strong>También puede interesarte:</strong></span>
+            {[
+              'celular nfc',
+              'samsung a55',
+              'samsung argentina',
+              'samsung tienda oficial',
+              'samsung con nfc',
+              'moto g72',
+              's21 ultra',
+            ].map((item, idx) => (
+              <span key={item} className="text-black mr-2">
+                {item}
+                {idx < 6 && <span className="mx-1 text-gray-400">|</span>}
+              </span>
+            ))}
+
           </div>
 
-          <div className="mb-4 px-4 py-4 overflow-x-auto">
-            <p>
-              Volver
-            </p>
+          <div className="!mb-4 overflow-x-auto">
 
+            <div className="!mb-4">
 
+              <p className="flex items-center gap-x-2">
+                <a href="#" className="!text-blue no-underline hover:underline">Volver al listado</a>
+                <span className="text-gray-400">{'>'}</span>
+                <a href="#" className="!text-blue no-underline hover:underline">Celulares y Teléfonos</a>
+                <span className="text-gray-400">{'>'}</span>
+                <a href="#" className="!text-blue no-underline hover:underline">Celulares y Smartphones</a>
+                <span className="text-gray-400">{'>'}</span>
+                <a href="#" className="!text-blue no-underline hover:underline">Samsung</a>
+              </p>
+            </div>
 
-            {/* Product Details Section Desktop */}
-            <div className="border-2 border-purple-500 flex">
-
-
-              <div className="border-6 border-blue-500 w-[478px]">
-
-                <div>
-                  adascadcasccds
-                </div>
-
-                <div className="border-2 border-red-500">
-                  <ProductGallery images={product.images} title={product.title} />
-                </div>
-
-
+            {/* Product Details Page Desktop */}
+            <div className="flex">
+              <div className="w-[478px]">
+                <ProductGallery images={product.images} title={product.title} />
                 <div>
                   Descrição.
                 </div>
-
-
               </div>
-
-
-
-
 
               {/* Desktop only - Title here */}
               <div className="flex">
                 <div className="block max-[720px]:hidden mb-4">
-                  <ProductInfo product={product} />
+                  <ProductInfo product={product} seller={seller} />
                   <ProductPrice product={product} installments={product_detail.installments} />
 
                   {/* Features Column - Fixed width 340px */}
@@ -166,9 +176,9 @@ export default function ProductPage() {
                       </span>
                       <span className="font-medium !ml-2">1 unidad</span>
                       <span className="text-xs text-gray-500 !ml-4 !mt-[-4px]">
-                          <svg className="w-4 h-4 inline mx-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                          </svg>
+                        <svg className="w-4 h-4 inline mx-1 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
                       </span>
                       <span className="text-xs text-gray-500 !ml-2">
                         <div>
@@ -296,7 +306,7 @@ export default function ProductPage() {
         <div>
           <div className="hidden max-[720px]:block mt-4">
             <Card>
-              <ProductInfo product={product} />
+              <ProductInfo product={product} seller={seller} />
               {/* <ProductPrice product={product} installments={product_detail.installments} /> */}
             </Card>
           </div>

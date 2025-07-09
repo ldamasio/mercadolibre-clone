@@ -80,3 +80,8 @@ a {
 .animate-spin {
   animation: spin 1s linear infinite;
 }
+
+a {
+  color: #3483fa;
+  text-decoration: none;
+}

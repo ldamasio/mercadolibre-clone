@@ -9,6 +9,7 @@ import { Card } from '@/components/ui/Card';
 import { Loading } from '@/components/ui/Loading';
 import { productService } from '@/services/productService';
 import { Product } from '@/types/product';
+import { ProductWithDetails } from '@/types/product';
 
 export default function HomePage() {
   const [products, setProducts] = useState<Product[]>([]);

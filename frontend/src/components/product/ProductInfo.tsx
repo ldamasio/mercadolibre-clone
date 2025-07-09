@@ -1,16 +1,18 @@
 // frontend/src/components/product/ProductInfo.tsx
 import React from 'react';
 import { Product } from '@/types/product';
-
+import { Seller } from '@/types/seller';
 interface ProductInfoProps {
   product: Product;
+  seller: Seller;
 }
 
-export function ProductInfo({ product }: ProductInfoProps) {
+export function ProductInfo({ product, seller }: ProductInfoProps) {
   return (
     <div className="border-2 border-blue-500 mb-6">
       <p className="text-sm text-gray-500 mb-1">
-        {product.condition === 'new' ? 'Novo' : 'Usado'} | {product.sold_quantity} vendidos
+        Visita la Tienda oficial de {seller.nickname}
+        {product.condition === 'new' ? 'Nuevo' : 'Usado'} | {product.sold_quantity} vendidos
       </p>
       <h1 className="text-2xl font-normal mb-4">{product.title}</h1>
       
