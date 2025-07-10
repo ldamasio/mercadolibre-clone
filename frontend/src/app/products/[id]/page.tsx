@@ -68,7 +68,7 @@ export default function ProductPage() {
       <main className="w-full flex flex-col items-center">
 
         {/* Desktop only */}
-        <div className="block max-[720px]:hidden w-[1184px] mx-auto bg-white">
+        <div className="block max-[720px]:hidden w-[1184px] mx-auto">
           <div className="!mt-6 !mb-4 text-sm text-bold text-black w-full">
             <span className="text-black !text-bold !mr-2"><strong>También puede interesarte:</strong></span>
             {[
@@ -104,7 +104,7 @@ export default function ProductPage() {
             </div>
 
             {/* Product Details Page Desktop */}
-            <div className="flex">
+            <div className="flex bg-white border-2 border-gray-200 rounded-lg !p-4">
               <div className="w-[478px]">
                 <ProductGallery images={product.images} title={product.title} />
                 <ProductFeatures features={product_detail.features} description={product_detail.description} />
@@ -113,41 +113,11 @@ export default function ProductPage() {
               {/* Desktop only - Title here */}
               <div className="flex">
                 <div className="block max-[720px]:hidden mb-4">
-                  <ProductInfo product={product} seller={seller} />
-                  <ProductPrice product={product} installments={product_detail.installments} />
-
-                  {/* Features Column - Fixed width 340px */}
-                  <div className="border-6 border-black-500 desktop:w-[340px] desktop:flex-col">
-
-                    {/* Color selector (if applicable) */}
-                    <Card className="mb-4">
-                      <h3 className="text-base font-medium mb-3">Color: Azul oscuro</h3>
-                      <div className="flex gap-2">
-                        <button className="w-12 h-12 rounded-full bg-blue-900 border-2 border-blue-500"></button>
-                        <button className="w-12 h-12 rounded-full bg-gray-800 border-2 border-gray-300"></button>
-                      </div>
-                    </Card>
-                  </div>
-
-                  <Card className="mb-4">
-                    <h3 className="text-base font-medium mb-4">Lo que tienes que saber de este producto</h3>
-                    <ul className="space-y-2">
-                      {product_detail.features.main.slice(0, 6).map((feature, index) => (
-                        <li key={index} className="flex items-start">
-                          <span className="text-gray-400 mr-2">•</span>
-                          <span className="text-sm">{feature.name}: {feature.value}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <button className="text-sm text-blue-600 mt-3 hover:underline">
-                      Ver características
-                    </button>
-                  </Card>
-
+                  <ProductInfo product={product} seller={seller} product_detail={product_detail} />
                 </div>
 
                 {/* Right Column - Purchase Card (Desktop) - Fixed width 309px */}
-                <div className="border-6 border-red-500 w-[325px] float-left block max-[720px]:hidden flex-shrink-0 flex-grow-0">
+                <div className="w-[325px] float-left block max-[720px]:hidden flex-shrink-0 flex-grow-0">
                   <Card className="!pl-2 !pr-2 !ml-2 !mr-2 !mt-2 !mb-2 top-4 text-sm border-2 border-gray-300">
                     <div className="!mt-4">
                       <span className="text-green-600">Envío gratis</span> a todo el país
@@ -305,7 +275,7 @@ export default function ProductPage() {
         <div>
           <div className="hidden max-[720px]:block mt-4">
             <Card>
-              <ProductInfo product={product} seller={seller} />
+              <ProductInfo product={product} seller={seller} product_detail={product_detail} />
               {/* <ProductPrice product={product} installments={product_detail.installments} /> */}
             </Card>
           </div>

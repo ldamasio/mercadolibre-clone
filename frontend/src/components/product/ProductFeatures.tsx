@@ -56,13 +56,35 @@ export function ProductFeatures({ features, description }: ProductFeaturesProps)
   const minScreen = 4.5, maxScreen = 7.0;
   const progress = screenSizeValue ? Math.min(1, Math.max(0, (screenSizeValue - minScreen) / (maxScreen - minScreen))) : 0.5;
 
-  return (
-    <div className="bg-white rounded-lg p-6 w-full max-w-none">
+  // Features já exibidas no topo (para não duplicar)
+  const excludedFeatures = [
+    'Tamaño de la pantalla',
+    'Resolución',
+    'Tecnología',
+    'Altura',
+    'Largura',
+    'Profundidade',
+    'Peso',
+  ];
+  // Filtra features para o grid central
+  const gridFeatures = mainFeatures.filter(
+    (f) => f.value && !excludedFeatures.includes(f.name)
+  );
+  // Divide em duas colunas
+  const mid = Math.ceil(gridFeatures.length / 2);
+  const leftCol = gridFeatures.slice(0, mid);
+  const rightCol = gridFeatures.slice(mid);
 
-      {/* HEADER: Tamanho da tela e dimensões */}
+  return (
+    <div className="!mt-28 !ml-6 bg-white rounded-lg p-6 w-full max-w-none">
+
+      {/* Linha cinza fina */}
+      <div className="w-[769px] !mt-8 !mb-8 h-px border-1 border-gray-300 my-6" />
+
+      {/* HEADER FEATURES: Tamanho da tela e dimensões */}
       <h2 className="text-xl font-semibold !mb-6">Características del producto</h2>
 
-      
+
       {screenSizeValue && (
         <div className="mb-4 flex flex-col gap-1">
           <div className="flex items-center mb-0">
@@ -107,45 +129,29 @@ export function ProductFeatures({ features, description }: ProductFeaturesProps)
       {/* BODY: Grid 2 colunas, alinhamento customizado */}
       <div className="h-60 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 mb-6">
         {/* Lado esquerdo */}
-        <div className="border-4 border-blue-300 flex flex-col gap-4">
-          {/* Cada feature em sua própria linha */}
-          {features.main?.find(f => f.name.toLowerCase().includes('memoria interna')) && (
-            <div className="flex flex-row items-center w-full">
-              <FontAwesomeIcon icon={getFeatureIcon('Memoria interna')} className="text-gray-500 mr-3 w-5 h-5" />
-              <span className="text-sm text-gray-700"><span className="font-medium">Memoria interna:</span> <span className="font-bold">{features.main.find(f => f.name.toLowerCase().includes('memoria interna'))?.value}</span></span>
+        <div className="flex flex-col gap-4 !gap-y-8">
+          {leftCol.slice(0, 3).map((feature) => (
+            <div key={feature.name} className="flex flex-row items-center w-full">
+              <FontAwesomeIcon icon={getFeatureIcon(feature.name)} className="text-gray-500 !mr-10 w-5 h-5" />
+              <span className="text-sm text-gray-700">
+                <span className="font-medium">{feature.name}:</span> <span className="font-bold">{feature.value}</span>
+              </span>
             </div>
-          )}
-          {features.main?.find(f => f.name.toLowerCase().includes('cámara trasera')) && (
-            <div className="flex flex-row items-center w-full">
-              <FontAwesomeIcon icon={getFeatureIcon('Cámara trasera principal')} className="text-gray-500 mr-3 w-5 h-5" />
-              <span className="text-sm text-gray-700"><span className="font-medium">Cámara trasera principal:</span> <span className="font-bold">{features.main.find(f => f.name.toLowerCase().includes('cámara trasera'))?.value}</span></span>
-            </div>
-          )}
-          {features.main?.find(f => f.name.toLowerCase().includes('nfc')) && (
-            <div className="flex flex-row items-center w-full">
-              <FontAwesomeIcon icon={getFeatureIcon('Con NFC')} className="text-gray-500 mr-3 w-5 h-5" />
-              <span className="text-sm text-gray-700"><span className="font-medium">Con NFC:</span> <span className="font-bold">{features.main.find(f => f.name.toLowerCase().includes('nfc'))?.value}</span></span>
-            </div>
-          )}
+          ))}
         </div>
-
         {/* Lado direito */}
-        <div className="border-4 border-red-300 pl-4 flex flex-col gap-4">
-          {features.main?.find(f => f.name.toLowerCase().includes('cámara frontal')) && (
-            <div className="flex items-center">
-              <FontAwesomeIcon icon={getFeatureIcon('Cámara frontal principal')} className="text-gray-500 mr-3 w-5 h-5" />
-              <span className="text-sm text-gray-700"><span className="font-medium">Cámara frontal principal:</span> <span className="font-bold">{features.main.find(f => f.name.toLowerCase().includes('cámara frontal'))?.value}</span></span>
+        <div className="flex flex-col gap-4 !gap-y-8">
+          {rightCol.slice(0, 2).map((feature) => (
+            <div key={feature.name} className="flex flex-row items-center w-full">
+              <FontAwesomeIcon icon={getFeatureIcon(feature.name)} className="text-gray-500 !mr-10 w-5 h-5" />
+              <span className="text-sm text-gray-700">
+                <span className="font-medium">{feature.name}:</span> <span className="font-bold">{feature.value}</span>
+              </span>
             </div>
-          )}
-          {(features.main?.find(f => f.name.toLowerCase().includes('huella dactilar')) || features.main?.find(f => f.name.toLowerCase().includes('reconocimiento facial'))) && (
-            <div className="flex items-center">
-              <FontAwesomeIcon icon={getFeatureIcon('Huella dactilar')} className="text-gray-500 mr-3 w-5 h-5" />
-              <span className="text-sm text-gray-700"><span className="font-medium">Desbloqueo:</span> <span className="font-bold">{features.main.find(f => f.name.toLowerCase().includes('huella dactilar'))?.value || features.main.find(f => f.name.toLowerCase().includes('reconocimiento facial'))?.value}</span></span>
-            </div>
-          )}
+          ))}
         </div>
       </div>
-
+      
       {/* FOOTER: Link para ver todas as características */}
       <div className="!mt-4 flex items-center gap-2 cursor-pointer text-blue-600 text-sm hover:underline w-fit">
         <span>Ver todas las características</span>
@@ -154,15 +160,15 @@ export function ProductFeatures({ features, description }: ProductFeaturesProps)
         </svg>
       </div>
 
-      {/* Add uma linha cinza fina aqui */}
-      <div className="w-full !mt-8 h-px border-1 border-gray-300 my-6" />
+      {/* Linha cinza fina */}
+      <div className="w-[769px] !mt-8 !mb-8 h-px border-1 border-gray-300 my-6" />
 
       {/* Descrição do produto */}
       <div
         className="mt-6 pl-24 pr-24 text-left"
         style={{ width: 800, maxWidth: '851px', direction: 'ltr' }}
       >
-        <h3 className="font-semibold mb-2 text-base">Descripción</h3>
+        <h3 className="font-semibold !mb-4 text-base text-lg">Descripción</h3>
         <p className="text-gray-700 leading-relaxed text-sm" style={{ whiteSpace: 'pre-line' }}>
           {description}
         </p>
