@@ -1,5 +1,5 @@
-/* frontend/src/styles/globals.css */
-@import "tailwindcss";
+/* src/app/globals.css */
+@import "tailwindcss";   /* importa tudo do Tailwind v4 */
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -79,4 +79,9 @@ a {
 
 .animate-spin {
   animation: spin 1s linear infinite;
+}
+
+a {
+  color: #3483fa;
+  text-decoration: none;
 }

@@ -1,7 +1,7 @@
 // frontend/src/app/layout.tsx
 import type { Metadata } from "next";
 import { Roboto } from 'next/font/google';
-
+import FontAwesomeConfig from '../components/FontAwesomeConfig';
 import "@/styles/globals.css";
 
 
@@ -22,7 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={roboto.className}>{children}</body>
+      <body className={roboto.className}>
+        <FontAwesomeConfig />
+        {children}
+      </body>
     </html>
   );
 }
