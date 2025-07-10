@@ -1,33 +1,33 @@
 [
   {
     "id": "SELLER001",
-    "nickname": "TECNOFAST",
+    "nickname": "Loja Oficial Samsung",
     "reputation": {
       "level": 5,
       "status": "platinum",
       "transactions": {
-        "completed": 12543,
-        "canceled": 156,
-        "total": 12699
+        "completed": 1000000,
+        "canceled": 15000,
+        "total": 1015000
       },
       "ratings": {
-        "positive": 98.5,
-        "neutral": 1.0,
-        "negative": 0.5
+        "positive": 99.2,
+        "neutral": 0.6,
+        "negative": 0.2
       }
     },
     "tags": [
+      "official_store",
       "brand",
-      "large_seller",
-      "credits_profile",
-      "messages_as_seller"
+      "premium_seller",
+      "international_seller"
     ],
     "location": {
       "city": "São Paulo",
       "state": "SP",
       "country": "Brasil"
     },
-    "experience_years": 5,
+    "experience_years": 10,
     "leader_status": "MercadoLíder Platinum"
   },
   {
@@ -90,36 +90,5 @@
     },
     "experience_years": 8,
     "leader_status": "Loja Oficial"
-  },
-  {
-    "id": "SELLER004",
-    "nickname": "Loja Oficial Samsung",
-    "reputation": {
-      "level": 5,
-      "status": "platinum",
-      "transactions": {
-        "completed": 1000000,
-        "canceled": 15000,
-        "total": 1015000
-      },
-      "ratings": {
-        "positive": 99.2,
-        "neutral": 0.6,
-        "negative": 0.2
-      }
-    },
-    "tags": [
-      "official_store",
-      "brand",
-      "premium_seller",
-      "international_seller"
-    ],
-    "location": {
-      "city": "São Paulo",
-      "state": "SP",
-      "country": "Brasil"
-    },
-    "experience_years": 10,
-    "leader_status": "MercadoLíder Platinum"
   }
 ]

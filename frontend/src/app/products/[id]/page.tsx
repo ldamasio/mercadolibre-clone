@@ -3,8 +3,8 @@
 
 import React from 'react';
 import { useParams } from 'next/navigation';
-import { Header } from '@/components/common/Header';
-import { Footer } from '@/components/common/Footer';
+// import { Header } from '@/components/common/Header';
+// import { Footer } from '@/components/common/Footer';
 import { Breadcrumb } from '@/components/common/Breadcrumb';
 import { ProductGallery } from '@/components/product/ProductGallery';
 import { ProductInfo } from '@/components/product/ProductInfo';
@@ -15,17 +15,10 @@ import { Card } from '@/components/ui/Card';
 import { Loading } from '@/components/ui/Loading';
 import { ErrorMessage } from '@/components/ui/ErrorMessage';
 import { useProduct } from '@/hooks/useProduct';
-
-import {
-  faBars,
-  faShoppingCart,
-  faCheckCircle,
-  faMemory,
-  faTv,
-} from '@fortawesome/free-solid-svg-icons';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
-import { faCcVisa, faCcMastercard } from '@fortawesome/free-brands-svg-icons';
 import { ProductFeatures } from '@/components/product/ProductFeatures';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCcVisa, faCcMastercard, faCcAmex } from '@fortawesome/free-brands-svg-icons';
+import { faCreditCard, faMoneyBillWave } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function ProductPage() {
@@ -36,7 +29,7 @@ export default function ProductPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-100">
-        <Header />
+        {/* <Header /> */}
         <div className="px-4 py-8 max-w-7xl mx-auto">
           <Loading />
         </div>
@@ -47,7 +40,7 @@ export default function ProductPage() {
   if (error || !data) {
     return (
       <div className="min-h-screen bg-gray-100">
-        <Header />
+        {/* <Header /> */}
         <div className="px-4 py-8 max-w-7xl mx-auto">
           <ErrorMessage
             message={error?.message || 'Produto não encontrado'}
@@ -62,7 +55,7 @@ export default function ProductPage() {
 
   return (
     <div className="min-h-screen bg-custom-gray">
-      <Header />
+      {/* <Header /> */}
 
       {/* Main Features */}
       <main className="w-full flex flex-col items-center">
@@ -223,44 +216,48 @@ export default function ProductPage() {
 
                   {/* Payment Methods */}
 
-                  <Card className="!pl-2 !pr-2 !pt-4 !ml-2 !mr-2 !mt-8 !mb-2 text-sm border-2 border-gray-300">
-                    <h3 className="font-medium mb-3">Medios de pago</h3>
+                  <Card className="!pl-4 !pr-4 !pt-4 !ml-2 !mr-2 !mt-8 !mb-2 text-sm border-2 border-gray-300">
+                    <h3 className="font-semibold mb-3 text-gray-800">Medios de pago</h3>
 
-                    <div className="space-y-3">
-                      <div>
-                        <p className="text-sm font-medium mb-2">Hasta 12 cuotas sin tarjeta</p>
-                        <div className="bg-green-600 text-white text-xs px-2 py-1 rounded inline-block">
-                          Mercado Crédito
-                        </div>
-                      </div>
-
-                      <div>
-                        <p className="text-sm font-medium mb-2">Tarjetas de crédito</p>
-                        <p className="text-xs text-gray-600 mb-2">¡Cuotas sin interés con bancos seleccionados!</p>
-                        <div className="flex gap-2">
-                          <div className="w-10 h-6 bg-gray-200 rounded"></div>
-                          <div className="w-10 h-6 bg-gray-200 rounded"></div>
-                          <div className="w-10 h-6 bg-gray-200 rounded"></div>
-                        </div>
-                      </div>
-
-                      <div>
-                        <p className="text-sm font-medium mb-2">Tarjetas de débito</p>
-                        <div className="flex gap-2">
-                          <div className="w-10 h-6 bg-gray-200 rounded"></div>
-                          <div className="w-10 h-6 bg-gray-200 rounded"></div>
-                        </div>
-                      </div>
-
-                      <div>
-                        <p className="text-sm font-medium mb-2">Efectivo</p>
-                        <div className="w-10 h-6 bg-gray-200 rounded"></div>
-                      </div>
-
-                      <a href="#" className="text-sm text-blue-600 hover:underline">
-                        Conocer otros medios de pago
-                      </a>
+                    {/* Banner verde */}
+                    <div className="flex items-center bg-green-600 text-white rounded-md !px-2 !py-4 mb-5">
+                      <FontAwesomeIcon icon={faCreditCard} className="w-5 h-5 mr-2" />
+                      <span className="font-medium text-sm !ml-2">¡Paga en <span className="font-bold">hasta 12 cuotas sin interés</span>!</span>
                     </div>
+
+                    {/* Tarjetas de crédito */}
+                    <div className="!mt-4 !mb-4">
+                      <p className="text-sm font-semibold !mb-1">Tarjetas de crédito</p>
+                      <p className="text-xs text-gray-600 !mb-2">¡Cuotas sin interés con bancos seleccionados!</p>
+                      <div className="flex gap-3 items-center">
+                        <FontAwesomeIcon icon={faCcMastercard} className="!w-10 !h-6 text-[#eb001b] bg-white rounded p-1" title="Mastercard" />
+                        <FontAwesomeIcon icon={faCcVisa} className="!w-10 !h-6 text-[#1a1f71] bg-white rounded p-1" title="Visa" />
+                        <FontAwesomeIcon icon={faCcAmex} className="!w-10 !h-6 text-[#2e77bb] bg-white rounded p-1" title="American Express" />
+                        <span className="!w-10 !h-6 bg-white rounded flex items-center justify-center p-1"><FontAwesomeIcon icon={faCreditCard} className="w-5 h-5 text-blue-400 mr-1" /><span className="text-xs font-bold text-blue-400">OCA</span></span>
+                      </div>
+                    </div>
+
+                    {/* Tarjetas de débito */}
+                    <div className="!mb-4">
+                      <p className="text-sm font-semibold !mb-1">Tarjetas de débito</p>
+                      <div className="flex gap-3 items-center">
+                        <span className="flex items-center !w-20 !h-6 bg-white rounded p-1"><FontAwesomeIcon icon={faCcVisa} className="w-7 h-5 text-[#1a1f71] mr-1" /></span>
+                        <span className="flex items-center !w-20 !h-6 bg-white rounded p-1"><FontAwesomeIcon icon={faCcMastercard} className="w-7 h-5 text-[#eb001b] mr-1" /></span>
+                      </div>
+                    </div>
+
+                    {/* Efectivo */}
+                    <div className="!mb-4">
+                      <p className="text-sm font-semibold !mb-1">Efectivo</p>
+                      <div className="flex gap-3 items-center">
+                        <span className="flex items-center w-20 h-6 bg-white rounded p-1"><FontAwesomeIcon icon={faMoneyBillWave} className="w-6 h-5 text-green-700 mr-1" /><span className="text-xs font-bold text-green-700">Abitab</span></span>
+                        <span className="flex items-center w-20 h-6 bg-white rounded p-1"><FontAwesomeIcon icon={faMoneyBillWave} className="w-6 h-5 text-green-800 mr-1" /><span className="text-xs font-bold text-green-800">eBROU</span></span>
+                      </div>
+                    </div>
+
+                    <a href="#" className="text-xs text-blue-600 hover:underline block !mt-2">
+                      Conoce otros medios de pago
+                    </a>
                   </Card>
                 </div>
 
@@ -299,7 +296,7 @@ export default function ProductPage() {
 
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
