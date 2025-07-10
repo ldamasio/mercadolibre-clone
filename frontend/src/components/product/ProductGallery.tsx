@@ -7,8 +7,40 @@ interface ProductGalleryProps {
   title: string;
 }
 
+interface ImageDimensions {
+  width: number;
+  height: number;
+}
+
 export function ProductGallery({ images, title }: ProductGalleryProps) {
   const [selectedImage, setSelectedImage] = useState(0);
+  const [imageDimensions, setImageDimensions] = useState<{ [key: number]: ImageDimensions }>({});
+
+  const handleImageLoad = (index: number, event: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = event.currentTarget;
+    setImageDimensions(prev => ({
+      ...prev,
+      [index]: {
+        width: img.naturalWidth,
+        height: img.naturalHeight
+      }
+    }));
+  };
+
+  const getImageStyle = (index: number) => {
+    const dimensions = imageDimensions[index];
+    if (!dimensions) {
+      return { width: '54px', height: '54px' }; // Default while loading
+    }
+
+    const isPortrait = dimensions.height > dimensions.width;
+    
+    if (isPortrait) {
+      return { height: '54px', width: 'auto' };
+    } else {
+      return { width: '54px', height: 'auto' };
+    }
+  };
 
   if (!images || images.length === 0) {
     return (
@@ -28,13 +60,15 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
             key={index}
             onClick={() => setSelectedImage(index)}
             onMouseEnter={() => setSelectedImage(index)}
-            className={`w-[54px] h-[54px] border-2 rounded overflow-hidden ${selectedImage === index ? 'border-blue-500' : 'border-gray-300'
+            className={`w-[54px] h-[54px] border-2 rounded overflow-hidden flex items-center justify-center ${selectedImage === index ? 'border-blue-500' : 'border-gray-300'
               }`}
           >
             <img
               src={`http://localhost:3000${image}`}
               alt={`${title} - ${index + 1}`}
-              className="w-full h-full object-cover"
+              className="object-cover"
+              style={getImageStyle(index)}
+              onLoad={(e) => handleImageLoad(index, e)}
             />
           </button>
         ))}

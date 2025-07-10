@@ -112,7 +112,7 @@ cd frontend && npm test
 
 ## 📸 Screenshots
 
-![Product Detail Page](docs/images/product-detail.png)
+![Product Detail Page](docs/images/product-detail.jpeg)
 *Product detail page showing all key information*
 
 ## 🏗️ Architecture Decisions
