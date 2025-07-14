@@ -96,21 +96,36 @@ update_deployment() {
     kubectl rollout status deployment/$app-$version -n $NAMESPACE --timeout=300s
 }
 
-# Switch traffic to new version
+# Switch traffic to new version using Gateway API
 switch_traffic() {
     local app=$1
     local new_version=$2
     
-    log "Switching traffic for $app to $new_version..."
+    log "Switching traffic for $app to $new_version using Gateway API..."
     
     # Update service selector
     kubectl patch service $app -n $NAMESPACE -p '{"spec":{"selector":{"version":"'$new_version'"}}}'
     
-    # Update Istio VirtualService weights
+    # Update HTTPRoute weights for Gateway API
+    if [ "$new_version" == "green" ]; then
+        # Switch 100% traffic to green
+        kubectl patch httproute $app-route-blue-green -n $NAMESPACE --type='json' -p='[
+            {"op": "replace", "path": "/spec/rules/0/backendRefs/0/weight", "value": 0},
+            {"op": "replace", "path": "/spec/rules/0/backendRefs/1/weight", "value": 100}
+        ]'
+    else
+        # Switch 100% traffic to blue
+        kubectl patch httproute $app-route-blue-green -n $NAMESPACE --type='json' -p='[
+            {"op": "replace", "path": "/spec/rules/0/backendRefs/0/weight", "value": 100},
+            {"op": "replace", "path": "/spec/rules/0/backendRefs/1/weight", "value": 0}
+        ]'
+    fi
+    
+    # Update Istio VirtualService as backup (if still using)
     kubectl patch virtualservice $app-virtual-service -n $NAMESPACE --type='json' -p='[
-        {"op": "replace", "path": "/spec/http/0/route/0/weight", "value": 0},
-        {"op": "replace", "path": "/spec/http/0/route/1/weight", "value": 100}
-    ]'
+        {"op": "replace", "path": "/spec/http/0/route/0/weight", "value": '$([[ "$new_version" == "blue" ]] && echo 100 || echo 0)'},
+        {"op": "replace", "path": "/spec/http/0/route/1/weight", "value": '$([[ "$new_version" == "green" ]] && echo 100 || echo 0)'}
+    ]' 2>/dev/null || true
     
     sleep 5
 }
@@ -218,4 +233,3 @@ main() {
 
 # Run main function
 main "$@"
-
