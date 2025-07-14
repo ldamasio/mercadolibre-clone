@@ -1,1 +1,33 @@
- 
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: mercadolibre
+  namespace: argocd
+spec:
+  description: MercadoLibre Clone Project
+  sourceRepos:
+  - 'https://github.com/ldamasio/mercadolibre-clone'
+  destinations:
+  - namespace: mercadolibre
+    server: https://kubernetes.default.svc
+  - namespace: istio-system
+    server: https://kubernetes.default.svc
+  - namespace: cert-manager
+    server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+  - group: ''
+    kind: Namespace
+  - group: cert-manager.io
+    kind: ClusterIssuer
+  - group: networking.istio.io
+    kind: Gateway
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - name: admin
+    policies:
+    - p, proj:mercadolibre:admin, applications, *, mercadolibre/*, allow
+    - p, proj:mercadolibre:admin, repositories, *, *, allow
+    groups:
+    - mercadolibre:admins
