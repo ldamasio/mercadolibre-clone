@@ -1,1 +1,38 @@
- 
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mercadolibre-backend
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: mercadolibre
+  source:
+    repoURL: https://github.com/ldamasio/mercadolibre-clone
+    targetRevision: HEAD
+    path: k8s/overlays/prod
+    kustomize:
+      images:
+      - ldamasio/mercadolibre-backend:1.0.0
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: mercadolibre
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+    - CreateNamespace=true
+    - PrunePropagationPolicy=foreground
+    - PruneLast=true
+    - ServerSideApply=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+  revisionHistoryLimit: 3
+  # RBAC - ServiceAccount to use for sync
+  serviceAccountName: argocd-manager
