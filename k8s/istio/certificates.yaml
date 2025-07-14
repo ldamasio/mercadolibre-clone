@@ -1,0 +1,53 @@
+---
+# Certificate for frontend domain
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: frontend-tls-cert
+  namespace: istio-system
+spec:
+  secretName: frontend-tls-cert
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+  - merli.leandrodamasio.com
+  # Additional configuration for Let's Encrypt
+  usages:
+  - digital signature
+  - key encipherment
+---
+# Certificate for backend domain
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: backend-tls-cert
+  namespace: istio-system
+spec:
+  secretName: backend-tls-cert
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+  - backend.merli.leandrodamasio.com
+  usages:
+  - digital signature
+  - key encipherment
+---
+# Alternative: Single wildcard certificate for all subdomains
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-tls-cert
+  namespace: istio-system
+spec:
+  secretName: wildcard-tls-cert
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+  - "*.leandrodamasio.com"
+  - leandrodamasio.com
+  usages:
+  - digital signature
+  - key encipherment
