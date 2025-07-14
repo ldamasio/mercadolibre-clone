@@ -33,4 +33,126 @@ spec:
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: allow-ingress-to-fronten
+  name: allow-ingress-to-frontend
+  namespace: mercadolibre
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            namespaces: ["istio-system", "ingress-nginx"]
+      to:
+        - operation:
+            methods: ["GET", "POST"]
+            paths: ["/*"]
+---
+# Allow health checks
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-health-checks
+  namespace: mercadolibre
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  action: ALLOW
+  rules:
+    - to:
+        - operation:
+            methods: ["GET"]
+            paths: ["/health", "/api/health"]
+      from:
+        - source:
+            namespaces: ["kube-system", "istio-system"]
+---
+# PeerAuthentication - Enforce mTLS
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: mercadolibre
+spec:
+  mtls:
+    mode: STRICT
+---
+# RequestAuthentication for JWT (if using external auth)
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: jwt-auth
+  namespace: mercadolibre
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  jwtRules:
+    - issuer: "https://auth.leandrodamasio.com"
+      jwksUri: "https://auth.leandrodamasio.com/.well-known/jwks.json"
+      audiences:
+        - "mercadolibre-api"
+      forwardOriginalToken: true
+---
+# AuthorizationPolicy for JWT validation
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: require-jwt
+  namespace: mercadolibre
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            requestPrincipals: ["https://auth.leandrodamasio.com/*"]
+      to:
+        - operation:
+            methods: ["GET", "POST", "PUT", "DELETE"]
+            paths: ["/api/products/*", "/api/users/*"]
+    - to:
+        - operation:
+            methods: ["GET"]
+            paths: ["/health", "/api/health", "/api/products"]  # Public endpoints
+---
+# ServiceAccount for Istio ingress gateway
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: istio-ingressgateway-service-account
+  namespace: istio-system
+---
+# Role for Istio components
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: istio-reader
+rules:
+  - apiGroups: [""]
+    resources: ["nodes", "pods", "services", "endpoints", "namespaces"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["networking.istio.io"]
+    resources: ["*"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["security.istio.io"]
+    resources: ["*"]
+    verbs: ["get", "list", "watch"]
+---
+# ClusterRoleBinding for Istio
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: istio-reader-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: istio-reader
+subjects:
+  - kind: ServiceAccount
+    name: istio-ingressgateway-service-account
+    namespace: istio-system

@@ -5,6 +5,9 @@ namespace: mercadolibre
 
 resources:
   - ../../base/common/namespace.yaml
+  - ../../base/common/rbac.yaml
+  - ../../base/common/rbac-operators.yaml
+  - ../../base/common/pod-security.yaml
   - ../../base/backend
   - ../../base/frontend
   - ingress.yaml
