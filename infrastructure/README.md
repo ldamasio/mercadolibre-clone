@@ -264,25 +264,3 @@ SLACK_WEBHOOK_URL: webhook-do-slack (opcional)
 5. **Blue-Green deployment** é executado
 6. **Health checks** validam o deploy
 7. **Rollback automático** em caso de falha
-
-## 📚 Documentação Adicional
-
-- [Arquitetura detalhada](../docs/ARCHITECTURE.md)
-- [Guia de troubleshooting](../docs/TROUBLESHOOTING.md)
-- [Runbook de produção](../docs/RUNBOOK.md)
-
-## 🤝 Contribuindo
-
-1. Crie uma branch feature
-2. Faça suas alterações
-3. Teste localmente
-4. Abra um Pull Request
-5. Aguarde aprovação e merge
-
-## ⚠️ Notas Importantes
-
-1. **Custos**: Monitore os custos de infraestrutura
-2. **Segurança**: Mantenha credenciais seguras
-3. **Backup**: Configure backups automáticos
-4. **Monitoramento**: Configure alertas para problemas
-5. **Documentação**: Mantenha este README atualizado
