@@ -1,0 +1,92 @@
+# HTTPRoute configuration for Blue-Green deployment
+# This file shows how to do traffic splitting with Gateway API
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: backend-route-blue-green
+  namespace: mercadolibre
+  annotations:
+    description: "HTTPRoute for backend with blue-green deployment support"
+spec:
+  parentRefs:
+  - name: mercadolibre-gateway
+    namespace: istio-system
+    sectionName: https-backend
+  hostnames:
+  - "backend.merli.leandrodamasio.com"
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    # Blue deployment (current stable)
+    - name: backend
+      port: 8080
+      weight: 100
+      filters:
+      - type: RequestHeaderModifier
+        requestHeaderModifier:
+          set:
+          - name: X-Backend-Version
+            value: blue
+    # Green deployment (new version) - initially 0 weight
+    - name: backend-green
+      port: 8080
+      weight: 0
+      filters:
+      - type: RequestHeaderModifier
+        requestHeaderModifier:
+          set:
+          - name: X-Backend-Version
+            value: green
+  - matches:
+    # Canary testing route - always goes to green
+    - path:
+        type: PathPrefix
+        value: /canary
+      headers:
+      - name: X-Canary-Test
+        value: "true"
+    backendRefs:
+    - name: backend-green
+      port: 8080
+      weight: 100
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: frontend-route-blue-green
+  namespace: mercadolibre
+  annotations:
+    description: "HTTPRoute for frontend with blue-green deployment support"
+spec:
+  parentRefs:
+  - name: mercadolibre-gateway
+    namespace: istio-system
+    sectionName: https-frontend
+  hostnames:
+  - "merli.leandrodamasio.com"
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    # Blue deployment (current stable)
+    - name: frontend
+      port: 3000
+      weight: 100
+    # Green deployment (new version) - initially 0 weight
+    - name: frontend-green
+      port: 3000
+      weight: 0
+  # Health check route
+  - matches:
+    - path:
+        type: Exact
+        value: /health
+    backendRefs:
+    - name: frontend
+      port: 3000
