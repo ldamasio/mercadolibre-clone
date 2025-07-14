@@ -1,0 +1,157 @@
+---
+# ServiceAccount para CI/CD (GitHub Actions)
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cicd-sa
+  namespace: mercadolibre
+---
+# Role para CI/CD - Deploy de aplicações
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: cicd-deployer-role
+  namespace: mercadolibre
+rules:
+  # Gerenciar deployments
+  - apiGroups: ["apps"]
+    resources: ["deployments", "replicasets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch"]
+  # Gerenciar services
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get", "list", "watch", "update", "patch"]
+  # Ver pods e logs
+  - apiGroups: [""]
+    resources: ["pods", "pods/log"]
+    verbs: ["get", "list", "watch"]
+  # Gerenciar ConfigMaps e Secrets
+  - apiGroups: [""]
+    resources: ["configmaps", "secrets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch"]
+  # Executar rollouts
+  - apiGroups: ["apps"]
+    resources: ["deployments/scale", "deployments/status"]
+    verbs: ["get", "update", "patch"]
+---
+# RoleBinding para CI/CD
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: cicd-deployer-binding
+  namespace: mercadolibre
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: cicd-deployer-role
+subjects:
+  - kind: ServiceAccount
+    name: cicd-sa
+    namespace: mercadolibre
+---
+# ServiceAccount para monitoramento
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: monitoring-sa
+  namespace: mercadolibre
+---
+# ClusterRole para monitoramento
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: monitoring-role
+rules:
+  # Ler métricas e estado dos recursos
+  - apiGroups: [""]
+    resources: ["nodes", "nodes/metrics", "services", "endpoints", "pods"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["deployments", "replicasets", "daemonsets", "statefulsets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["batch"]
+    resources: ["jobs", "cronjobs"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["metrics.k8s.io"]
+    resources: ["pods", "nodes"]
+    verbs: ["get", "list"]
+---
+# ClusterRoleBinding para monitoramento
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: monitoring-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: monitoring-role
+subjects:
+  - kind: ServiceAccount
+    name: monitoring-sa
+    namespace: mercadolibre
+---
+# ServiceAccount para desenvolvedor
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: developer-sa
+  namespace: mercadolibre
+---
+# Role para desenvolvedor - Read-only com alguns privilégios
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: developer-role
+  namespace: mercadolibre
+rules:
+  # Ver todos os recursos
+  - apiGroups: ["", "apps", "batch", "networking.k8s.io"]
+    resources: ["*"]
+    verbs: ["get", "list", "watch"]
+  # Port-forward para debug
+  - apiGroups: [""]
+    resources: ["pods/portforward"]
+    verbs: ["create"]
+  # Ver logs
+  - apiGroups: [""]
+    resources: ["pods/log"]
+    verbs: ["get"]
+  # Executar comandos em pods (para debug)
+  - apiGroups: [""]
+    resources: ["pods/exec"]
+    verbs: ["create"]
+---
+# RoleBinding para desenvolvedor
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: developer-binding
+  namespace: mercadolibre
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: developer-role
+subjects:
+  - kind: ServiceAccount
+    name: developer-sa
+    namespace: mercadolibre
+  - kind: Group
+    name: developers
+    apiGroup: rbac.authorization.k8s.io
+---
+# ClusterRole para operações de emergência (break-glass)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: emergency-admin
+  annotations:
+    description: "Use only in emergencies. All actions are audited."
+rules:
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["*"]
+  - nonResourceURLs: ["*"]
+    verbs: ["*"]
+---
+# NÃO criar RoleBinding para emergency-admin por padrão
+# Deve ser criado manualmente apenas quando necessário e removido após uso

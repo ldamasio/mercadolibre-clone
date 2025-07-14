@@ -1,0 +1,21 @@
+# Contabo credentials
+contabo_client_id     = "your-contabo-client-id"
+contabo_client_secret = "your-contabo-client-secret"
+
+# Huawei Cloud credentials
+huawei_access_key = "your-huawei-access-key"
+huawei_secret_key = "your-huawei-secret-key"
+huawei_region     = "ap-southeast-1"
+
+# Image ID for Ubuntu 22.04 in Huawei Cloud (update with actual ID)
+huawei_image_id = "your-ubuntu-2204-image-id"
+
+# Key pair name in Huawei Cloud
+huawei_key_pair_name = "mercadolibre-key"
+
+# SSH key for server access
+ssh_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC..."
+
+# Path to SSH private key
+ssh_private_key_path = "~/.ssh/mercadolibre-key"
+

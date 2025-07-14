@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+  - service.yaml
+
+commonLabels:
+  app.kubernetes.io/name: frontend
+  app.kubernetes.io/component: web
+  app.kubernetes.io/part-of: mercadolibre
+
+images:
+  - name: ldamasio/mercadolibre-frontend
+    newTag: 1.0.0
