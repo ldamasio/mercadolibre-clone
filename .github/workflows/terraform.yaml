@@ -1,1 +1,113 @@
- 
+name: Terraform
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'infrastructure/terraform/**'
+      - '.github/workflows/terraform.yaml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'infrastructure/terraform/**'
+      - '.github/workflows/terraform.yaml'
+
+env:
+  TF_VERSION: '1.6.0'
+  TF_WORKING_DIR: './infrastructure/terraform/environments/prod'
+
+jobs:
+  terraform:
+    name: Terraform Plan and Apply
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: ${{ env.TF_VERSION }}
+        
+    - name: Configure AWS credentials (for state backend)
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+        
+    - name: Terraform Init
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: terraform init
+      
+    - name: Terraform Format Check
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: terraform fmt -check
+      
+    - name: Terraform Validate
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      run: terraform validate
+      
+    - name: Terraform Plan
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      env:
+        TF_VAR_contabo_client_id: ${{ secrets.CONTABO_CLIENT_ID }}
+        TF_VAR_contabo_client_secret: ${{ secrets.CONTABO_CLIENT_SECRET }}
+        TF_VAR_huawei_access_key: ${{ secrets.HUAWEI_ACCESS_KEY }}
+        TF_VAR_huawei_secret_key: ${{ secrets.HUAWEI_SECRET_KEY }}
+        TF_VAR_huawei_image_id: ${{ secrets.HUAWEI_IMAGE_ID }}
+        TF_VAR_huawei_key_pair_name: ${{ secrets.HUAWEI_KEY_PAIR_NAME }}
+        TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
+      run: |
+        terraform plan -out=tfplan
+        terraform show -no-color tfplan > tfplan.txt
+        
+    - name: Post Plan to PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      env:
+        PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const fs = require('fs');
+          const plan = fs.readFileSync('${{ env.TF_WORKING_DIR }}/tfplan.txt', 'utf8');
+          const output = `#### Terraform Plan 📖
+          <details><summary>Show Plan</summary>
+          
+          \`\`\`
+          ${plan}
+          \`\`\`
+          
+          </details>
+          
+          *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: output
+          })
+          
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      working-directory: ${{ env.TF_WORKING_DIR }}
+      env:
+        TF_VAR_contabo_client_id: ${{ secrets.CONTABO_CLIENT_ID }}
+        TF_VAR_contabo_client_secret: ${{ secrets.CONTABO_CLIENT_SECRET }}
+        TF_VAR_huawei_access_key: ${{ secrets.HUAWEI_ACCESS_KEY }}
+        TF_VAR_huawei_secret_key: ${{ secrets.HUAWEI_SECRET_KEY }}
+        TF_VAR_huawei_image_id: ${{ secrets.HUAWEI_IMAGE_ID }}
+        TF_VAR_huawei_key_pair_name: ${{ secrets.HUAWEI_KEY_PAIR_NAME }}
+        TF_VAR_ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
+      run: terraform apply -auto-approve tfplan
+      
+    - name: Commit Ansible Inventory
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add infrastructure/ansible/inventories/prod/hosts.yml || true
+        git diff --staged --quiet || git commit -m "Update Ansible inventory from Terraform"
+        git push || true
