@@ -10,7 +10,6 @@ resources:
   - ../../base/common/pod-security.yaml
   - ../../base/backend
   - ../../base/frontend
-  - ingress.yaml
   - cert-manager/clusterissuer.yaml
 
 patchesStrategicMerge:

@@ -166,16 +166,26 @@ O deploy blue-green é automatizado via script:
 - Let's Encrypt como CA
 - Auto-renovação a cada 90 dias
 
+### RBAC (Role-Based Access Control)
+
+- **ServiceAccounts** específicos para cada componente
+- **Principle of Least Privilege** aplicado
+- **Network Policies** para isolamento de tráfego
+- **Pod Security Standards** enforçados
+- Documentação completa em [docs/RBAC.md](../docs/RBAC.md)
+
 ### Network Policies
 
 - Istio controla tráfego entre serviços
 - Deny all por padrão
 - Whitelist específico por serviço
+- mTLS enforçado via Istio
 
 ### Secrets Management
 
 - Secrets do Kubernetes
 - Rotação manual (pode ser automatizada com Sealed Secrets)
+- ServiceAccounts com permissões mínimas
 
 ## 📊 Monitoramento
 
