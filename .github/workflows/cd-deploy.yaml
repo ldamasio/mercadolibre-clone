@@ -1,1 +1,144 @@
- 
+name: CD - Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy'
+        required: true
+        default: 'prod'
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+      deployment_type:
+        description: 'Deployment type'
+        required: true
+        default: 'blue-green'
+        type: choice
+        options:
+          - blue-green
+          - canary
+          - rolling
+  push:
+    branches: [ main ]
+    paths:
+      - 'k8s/**'
+
+env:
+  ARGOCD_SERVER: ${{ secrets.ARGOCD_SERVER }}
+  ARGOCD_AUTH_TOKEN: ${{ secrets.ARGOCD_AUTH_TOKEN }}
+
+jobs:
+  validate:
+    name: Validate Manifests
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install tools
+      run: |
+        # Install kubectl
+        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        chmod +x kubectl
+        sudo mv kubectl /usr/local/bin/
+        
+        # Install kustomize
+        curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+        sudo mv kustomize /usr/local/bin/
+        
+        # Install kubeval
+        wget https://github.com/instrumenta/kubeval/releases/latest/download/kubeval-linux-amd64.tar.gz
+        tar xf kubeval-linux-amd64.tar.gz
+        sudo mv kubeval /usr/local/bin/
+        
+    - name: Validate Kubernetes manifests
+      run: |
+        # Build kustomization
+        kustomize build k8s/overlays/prod > /tmp/manifests.yaml
+        
+        # Validate with kubeval
+        kubeval --strict /tmp/manifests.yaml
+        
+    - name: Check Istio configuration
+      run: |
+        # Download istioctl
+        curl -L https://istio.io/downloadIstio | sh -
+        sudo mv istio-*/bin/istioctl /usr/local/bin/
+        
+        # Analyze Istio configuration
+        istioctl analyze -f k8s/istio/
+
+  deploy:
+    name: Deploy to Kubernetes
+    needs: validate
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install ArgoCD CLI
+      run: |
+        curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+        chmod +x /usr/local/bin/argocd
+        
+    - name: Configure ArgoCD
+      run: |
+        argocd login ${{ env.ARGOCD_SERVER }} --auth-token ${{ env.ARGOCD_AUTH_TOKEN }} --grpc-web
+        
+    - name: Sync ArgoCD Applications
+      run: |
+        # Sync backend application
+        argocd app sync mercadolibre-backend --force --prune
+        argocd app wait mercadolibre-backend --health --timeout 300
+        
+        # Sync frontend application
+        argocd app sync mercadolibre-frontend --force --prune
+        argocd app wait mercadolibre-frontend --health --timeout 300
+        
+    - name: Perform Blue-Green Deployment
+      if: ${{ github.event.inputs.deployment_type == 'blue-green' || github.event_name == 'push' }}
+      run: |
+        # Script to perform blue-green deployment
+        ./scripts/blue-green-deploy.sh
+        
+    - name: Run Smoke Tests
+      run: |
+        # Wait for services to be ready
+        sleep 30
+        
+        # Test backend health
+        curl -f https://backend.merli.leandrodamasio.com/health || exit 1
+        
+        # Test frontend
+        curl -f https://merli.leandrodamasio.com || exit 1
+        
+    - name: Rollback on Failure
+      if: failure()
+      run: |
+        echo "Deployment failed, initiating rollback..."
+        argocd app rollback mercadolibre-backend 0
+        argocd app rollback mercadolibre-frontend 0
+        
+  notify:
+    name: Notify Deployment Status
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - name: Send notification
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        text: |
+          Deployment Status: ${{ job.status }}
+          Environment: ${{ github.event.inputs.environment || 'prod' }}
+          Commit: ${{ github.sha }}
+          Author: ${{ github.actor }}
+        webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
